@@ -6,9 +6,9 @@ export default function HomePage() {
   const { isSignedIn, user } = useUser();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen flex items-center justify-center">
       <main className="text-center p-8 bg-white rounded-lg shadow-md w-96">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Inpulsa</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-6">Impulsa</h1>
 
         {isSignedIn ? (
           <div className="flex flex-col gap-4">

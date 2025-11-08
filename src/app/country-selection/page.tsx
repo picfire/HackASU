@@ -28,7 +28,7 @@ export default function CountrySelection() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-teal-100 p-8">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <main className="bg-white rounded-lg shadow-md p-8 w-96 text-center flex flex-col gap-6">
         <h1 className="text-2xl font-bold mb-4">Welcome {user?.firstName}!</h1>
         <p className="mb-6">Select the country you want to study/work in:</p>
