@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useUser, SignOutButton } from "@clerk/nextjs";
 
 export default function CountrySelection() {
   const { user } = useUser();
@@ -28,10 +28,11 @@ export default function CountrySelection() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-teal-100">
-      <main className="bg-white rounded-lg shadow-md p-8 w-96 text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-teal-100 p-8">
+      <main className="bg-white rounded-lg shadow-md p-8 w-96 text-center flex flex-col gap-6">
         <h1 className="text-2xl font-bold mb-4">Welcome {user?.firstName}!</h1>
         <p className="mb-6">Select the country you want to study/work in:</p>
+
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <select
             value={country}
@@ -46,6 +47,7 @@ export default function CountrySelection() {
               </option>
             ))}
           </select>
+
           <button
             type="submit"
             className="bg-teal-500 text-white p-2 rounded hover:bg-teal-600 transition"
@@ -53,6 +55,13 @@ export default function CountrySelection() {
             Continue
           </button>
         </form>
+
+        {/* Sign Out Button at the bottom */}
+        <SignOutButton>
+          <button className="bg-red-500 text-white p-2 rounded hover:bg-red-600 transition mt-4">
+            Sign Out
+          </button>
+        </SignOutButton>
       </main>
     </div>
   );
