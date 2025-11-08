@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+// src/app/layout.tsx
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Inpulsa",
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+}: {
+  children: React.ReactNode;
+}) {
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
@@ -32,8 +36,8 @@ export function ClerkLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* ClerkProvider requires a client component */}
-        <ClientWrapper>{children}</ClientWrapper>
+        {/* Client wrapper here */}
+        <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>
   );
