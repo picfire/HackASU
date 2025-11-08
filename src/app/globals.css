@@ -10,6 +10,15 @@ body {
   color: rgb(27, 27, 27);
 }
 
+::-webkit-scrollbar { /* Hide the scrollbar Lakshya */
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
