@@ -8,9 +8,18 @@ export default function HomePage() {
   if (!isLoaded) return null; // Wait until Clerk finishes loading
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 gap-8">
-      {/* Centered logo */}
-      <img src="/Impulsa.svg" alt="Impulsa Logo" className="w-300 h-300" />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 gap-8">
+      {/* Logo */}
+      <img src="/Impulsa.svg" alt="Impulsa Logo" className="w-200 h-200" />
+
+      {/* Intro Text */}
+      <div className="max-w-xl text-center">
+        <p className="text-gray-700 text-lg">
+          Impulsa helps students and professionals explore opportunities to
+          study or work abroad. Choose your destination, stay updated, and make
+          your global journey easier!
+        </p>
+      </div>
 
       {/* Sign in button */}
       {!isSignedIn && (
