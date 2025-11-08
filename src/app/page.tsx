@@ -1,9 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function HomePage() {
+  const router = useRouter();
   const { isSignedIn, user } = useUser();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push("/country-selection"); // redirects to your country selection page
+    }
+  }, [isSignedIn, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
