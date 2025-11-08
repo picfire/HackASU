@@ -1,3 +1,5 @@
+import './page.css';
+
 export default function Challenges() {
   const lessons = [
     { id: 1, type: 'start', completed: false, current: true, icon: '⭐' },
