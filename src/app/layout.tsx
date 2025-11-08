@@ -3,6 +3,7 @@ import { Titillium_Web } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import type { Metadata } from "next";
+import Navbar from "./components/navbar";
 
 const titillium = Titillium_Web({
   weight: ["400", "700"],
@@ -20,30 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={titillium.className} suppressHydrationWarning>
-        {/* Navigation Bar */}
-        <div className="navbar bg-white shadow-sm">
-          <a className="btn btn-ghost text-xl">Impulsa</a>
-        </div>
-
-        {/* Page Layout */}
-        <body className="antialiased" suppressHydrationWarning>
-          {children}
+      <html lang="en" suppressHydrationWarning>
+        <body className="antialiased text-black">
+          <Navbar />
+          <main>{children}</main>
         </body>
       </html>
     </ClerkProvider>
-  );
-}
-
-export function ClerkLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body className="antialiased">
-        {/* Client wrapper here */}
-        <ClerkProvider>{children}</ClerkProvider>
-      </body>
-    </html>
   );
 }
