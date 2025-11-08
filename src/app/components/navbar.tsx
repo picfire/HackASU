@@ -27,7 +27,7 @@ export default function Navbar() {
               Country Selection
             </button>
             <SignOutButton>
-              <button className="btn btn-error">Sign Out</button>
+              <button className="btn btn-outline">Sign Out</button>
             </SignOutButton>
           </>
         )}
