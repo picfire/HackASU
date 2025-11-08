@@ -10,9 +10,20 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
-        {children}
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className="antialiased" suppressHydrationWarning>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}
+
+export function ClerkLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
     <html lang="en">
       <body className="antialiased">
         {/* ClerkProvider requires a client component */}
@@ -20,10 +31,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
-
-// Wrap the children in a client component so hooks work
-function ClientWrapper({ children }: { children: React.ReactNode }) {
-  "use client";
-  return <ClerkProvider>{children}</ClerkProvider>;
 }
