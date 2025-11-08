@@ -1,35 +1,25 @@
 "use client";
 
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 
 export default function HomePage() {
-  const { isSignedIn, user } = useUser();
+  const { isLoaded, isSignedIn } = useUser();
+
+  if (!isLoaded) return null; // Wait until Clerk finishes loading
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <main className="text-center p-8 bg-white rounded-lg shadow-md w-96">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Impulsa</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 gap-8">
+      {/* Centered logo */}
+      <img src="/Impulsa.svg" alt="Impulsa Logo" className="w-300 h-300" />
 
-        {isSignedIn ? (
-          <div className="flex flex-col gap-4">
-            <p className="text-gray-700">
-              Signed in as{" "}
-              <strong>{user?.emailAddresses[0].emailAddress}</strong>
-            </p>
-            <SignOutButton>
-              <button className="bg-red-500 text-white p-2 rounded hover:bg-red-600 transition">
-                Sign Out
-              </button>
-            </SignOutButton>
-          </div>
-        ) : (
-          <SignInButton mode="modal">
-            <button className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition">
-              Sign in with Google
-            </button>
-          </SignInButton>
-        )}
-      </main>
+      {/* Sign in button */}
+      {!isSignedIn && (
+        <SignInButton mode="modal">
+          <button className="bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600 transition">
+            Sign in with Google
+          </button>
+        </SignInButton>
+      )}
     </div>
   );
 }
