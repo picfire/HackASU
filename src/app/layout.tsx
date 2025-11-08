@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "HackASU Project",
-  description: "Next.js app with TypeScript and Tailwind CSS",
+  title: "Inpulsa",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className="antialiased">
-        {children}
+        {/* ClerkProvider requires a client component */}
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );
+}
+
+// Wrap the children in a client component so hooks work
+function ClientWrapper({ children }: { children: React.ReactNode }) {
+  "use client";
+  return <ClerkProvider>{children}</ClerkProvider>;
 }
