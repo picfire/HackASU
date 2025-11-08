@@ -1,10 +1,16 @@
 // src/app/layout.tsx
+import { Titillium_Web } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import type { Metadata } from "next";
 
+const titillium = Titillium_Web({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+})
+
 export const metadata: Metadata = {
-  title: "Inpulsa",
+  title: "Impulsa",
 };
 
 export default function RootLayout({
@@ -14,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" className={titillium.className} suppressHydrationWarning>
         {/* Navigation Bar */}
         <div className="navbar bg-white shadow-sm">
-          <a className="btn btn-ghost text-xl">Inpulsa</a>
+          <a className="btn btn-ghost text-xl">Impulsa</a>
         </div>
 
         {/* Page Layout */}
