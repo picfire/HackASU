@@ -24,7 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#9333ea", 
+          colorBackground: "#ffffff",
+          colorText: "#1f2937", 
+          colorInputBackground: "#ffffff",
+          colorInputText: "#1f2937",
+          borderRadius: "0.5rem",
+        },
+      }}
+    >
       <html lang="en" className={titillium.className}>
         <body className="antialiased" suppressHydrationWarning>
           <Navbar />

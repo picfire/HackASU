@@ -17,6 +17,12 @@ const universitiesByCountry: {
 } = {
   USA: [
     {
+      name: "Arizona State University",
+      rank: "#14",
+      city: "Tempe, AZ",
+      logo: "/universities/arizona-state.png",
+    },
+    {
       name: "Harvard University",
       rank: "#1",
       city: "Cambridge, MA",
