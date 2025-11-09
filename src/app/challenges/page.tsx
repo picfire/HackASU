@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import './page.css';
-import { StatsBar, LeagueCard, DailyQuests, LessonTimeline } from './components';
+import { StatsBar, LeagueCard, DailyQuests, LessonTimeline, UserProfile } from './components';
 import { Survey } from './components/survey';
 import { QuestionDisplay } from './components/question';
 import { AllQuestionsLoader } from './components/allQuestionsLoader';
@@ -202,6 +202,13 @@ export default function Challenges() {
 
         {/* Right Sidebar */}
         <div className="space-y-6">
+          {userContext && (
+            <UserProfile
+              destination={userContext.destination}
+              university={userContext.university}
+              studyField={userContext.studyField}
+            />
+          )}
           <StatsBar />
           <LeagueCard />
           <DailyQuests />
