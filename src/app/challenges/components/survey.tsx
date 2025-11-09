@@ -97,7 +97,7 @@ export function Survey({ onComplete }: SurveyProps) {
               value={formData.studyField}
               onChange={handleChange}
               placeholder="e.g., Computer Science, Business, Medicine"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 cursor-not-allowed"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-700"
               required
             />
           </div>
