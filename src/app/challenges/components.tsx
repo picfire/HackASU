@@ -1,5 +1,6 @@
 // Components for the Challenges page
 import './page.css';
+import { useEffect, useRef } from 'react';
 
 export function Header() {
   return (
@@ -38,27 +39,7 @@ export function StatsBar() {
   );
 }
 
-export function SuperPromo() {
-  return (
-    <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-6 text-white">
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <div className="bg-white/20 rounded-lg px-3 py-1 text-sm font-bold inline-block mb-2">
-            SUPER
-          </div>
-          <h3 className="text-xl font-bold mb-2">Try Super for free</h3>
-          <p className="text-sm opacity-90">
-            No ads, personalized practice, and unlimited Legendary!
-          </p>
-        </div>
-        <div className="text-5xl">🎨</div>
-      </div>
-      <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-bold mt-4">
-        TRY 1 WEEK FREE
-      </button>
-    </div>
-  );
-}
+
 
 export function LeagueCard() {
   return (
@@ -124,19 +105,26 @@ interface LessonNode {
   icon: string;
 }
 
-export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
+export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonNode[], onCompleteLesson?: (id: number) => void }) {
   return (
     <div className="relative">
-      <div className="flex flex-col items-center gap-8 py-12">
-        {lessons.map((lesson, index) => (
-          <div key={lesson.id} className="relative flex flex-col items-center">
+      <div className="flex flex-col items-center gap-1 py-5">
+        {lessons.map((lesson, index) => {
+          const isLocked = !lesson.completed && !lesson.current && lessons.findIndex(l => l.current) < lesson.id - 1;
+          
+          return (
+          <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-24' : 'ml-24'}`}>
             {/* Lesson Circle */}
-            <div className={`lesson-node relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all cursor-pointer
+            <div 
+              onClick={() => (lesson.current && onCompleteLesson) && onCompleteLesson(lesson.id)}
+              className={`lesson-node relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all cursor-pointer
               ${lesson.current 
-                ? 'pulse glow bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/50 scale-110' 
+                ? 'pulse glow bg-gradient-to-br from-[#613873] to-[#7a4a8f] shadow-lg shadow-[#613873]/50 scale-110' 
                 : lesson.completed 
-                  ? 'bg-gradient-to-br from-green-400 to-green-600' 
-                  : 'bg-slate-700 hover:bg-slate-600'
+                  ? 'bg-gradient-to-br from-[#613873] to-[#7a4a8f]' 
+                  : isLocked
+                  ? 'bg-gray-600 opacity-50 cursor-not-allowed lesson-locked'
+                  : 'bg-[#613873] hover:bg-[#7a4a8f]'
               }`}>
               {lesson.current && (
                 <div className="absolute -top-3 -right-3 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold animate-pulse">
@@ -148,12 +136,13 @@ export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
             
             {/* Label */}
             {lesson.current && (
-              <div className="mt-2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+              <div className="mt-2 bg-gradient-to-r from-[#613873] to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
                 START
               </div>
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="text-center mt-12"> {/* this the bottom text */}

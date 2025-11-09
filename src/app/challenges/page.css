@@ -9,7 +9,30 @@
 .tab-header {
     background-color: #9454BF;
     background: radial-gradient(circle, #b778e0 50%, #9454BF 75%, #9454BF 100%);
-
     border-bottom: 1px solid #334155;
     padding: 1.2rem;
+}
+
+.lesson-node {
+    background-color: #613873;
+}
+
+.lesson-node.current {
+    background: linear-gradient(to bottom right, #613873, #7a4a8f);
+}
+
+.timeline-connector {
+    position: absolute;
+    width: 3px;
+    background-color: #613873;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lesson-locked::after {
+    content: '🔒';
+    position: absolute;
+    font-size: 12px;
+    bottom: -5px;
+    right: -5px;
 }
