@@ -5,6 +5,8 @@ import buttonSvg from './assets/button.svg';
 import starSvg from './assets/Star.svg';
 import keySvg from './assets/Key.svg';
 import SpotlightCard from './components/spotlight';
+import { useUser } from '@clerk/nextjs';
+import Image from 'next/image';
 
 interface UserProfileProps {
   destination: string;
@@ -13,6 +15,8 @@ interface UserProfileProps {
 }
 
 export function UserProfile({ destination, university, studyField }: UserProfileProps) {
+  const { user } = useUser();
+  
   return (
     <SpotlightCard 
       className="bg-gradient-to-br from-[#613873] to-[#7a4a8f] rounded-2xl p-6 mb-6 border-0"
@@ -21,7 +25,17 @@ export function UserProfile({ destination, university, studyField }: UserProfile
       <div className="text-white">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-2xl font-bold">Your Profile</h3>
-          <div className="text-4xl">👤</div>
+          {user?.imageUrl ? (
+            <Image 
+              src={user.imageUrl} 
+              alt="Profile" 
+              width={48} 
+              height={48} 
+              className="rounded-full"
+            />
+          ) : (
+            <div className="text-4xl">👤</div>
+          )}
         </div>
         <div className="space-y-3">
           <div>
