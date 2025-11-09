@@ -27,18 +27,18 @@ export default function Challenges() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   const initialLessons = [
-    { id: 1, type: 'start', completed: false, current: true, icon: '⭐' },
-    { id: 2, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 3, type: 'chest', completed: false, current: false, icon: '📦' },
-    { id: 4, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 5, type: 'star', completed: false, current: false, icon: '⭐' },
-    { id: 6, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 7, type: 'chest', completed: false, current: false, icon: '📦' },
-    { id: 8, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 9, type: 'star', completed: false, current: false, icon: '⭐' },
-    { id: 10, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 11, type: 'chest', completed: false, current: false, icon: '📦' },
-    { id: 12, type: 'lesson', completed: false, current: false, icon: '🎯' },
+    { id: 1, type: 'start', completed: false, current: true, icon: 'key' },
+    { id: 2, type: 'lesson', completed: false, current: false, icon: 'star' },
+    { id: 3, type: 'chest', completed: false, current: false, icon: 'star' },
+    { id: 4, type: 'lesson', completed: false, current: false, icon: 'star' },
+    { id: 5, type: 'star', completed: false, current: false, icon: 'star' },
+    { id: 6, type: 'lesson', completed: false, current: false, icon: 'star' },
+    { id: 7, type: 'chest', completed: false, current: false, icon: 'star' },
+    { id: 8, type: 'lesson', completed: false, current: false, icon: 'star' },
+    { id: 9, type: 'star', completed: false, current: false, icon: 'star' },
+    { id: 10, type: 'lesson', completed: false, current: false, icon: 'star' },
+    { id: 11, type: 'chest', completed: false, current: false, icon: 'star' },
+    { id: 12, type: 'lesson', completed: false, current: false, icon: 'key' },
   ];
 
   const [lessons, setLessons] = useState(initialLessons);
