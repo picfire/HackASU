@@ -14,19 +14,15 @@ export const metadata: Metadata = {
   title: "Impulsa",
 };
 
-export default function RootLayout({
+export default function WithLayoutGroup({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" className={titillium.className} suppressHydrationWarning>
-        <body className="antialiased text-black">
-          <Navbar />
-          <main>{children}</main>
-        </body>
-      </html>
-    </ClerkProvider>
-  );    
+    <>
+      <Navbar />
+      <main>{children}</main>
+    </>
+  );
 }

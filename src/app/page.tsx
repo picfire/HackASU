@@ -73,7 +73,7 @@ export default function HomePage() {
         {/* Sign in button */}
         {!isSignedIn && (
           <SignInButton mode="modal">
-            <button className="bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600 transition">
+            <button className="bg-indigo-500 text-white px-6 py-3 rounded-lg transition hover:bg-indigo-600">
               Sign in with Google
             </button>
           </SignInButton>
