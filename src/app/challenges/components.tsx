@@ -111,16 +111,25 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
     <div className="relative">
       <div className="flex flex-col items-center gap-1 py-5">
         {lessons.map((lesson, index) => {
-          const isLocked = !lesson.completed && !lesson.current && lessons.findIndex(l => l.current) < lesson.id - 1;
+          const currentLesson = lessons.find(l => l.current);
+          const isLocked = !lesson.completed && !lesson.current && currentLesson && currentLesson.id < lesson.id - 1;
           
           return (
           <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-96' : '-ml-52'}`}>
             {/* Lesson Button SVG */}
             <button
-              onClick={() => (lesson.current && onCompleteLesson) && onCompleteLesson(lesson.id)}
-              className={`relative z-10 transition-all cursor-pointer ${
-                isLocked ? 'cursor-not-allowed opacity-50' : ''
-              } ${lesson.current ? 'scale-110 animate-pulse' : ''}`}
+              onClick={() => {
+                console.log('Button clicked for lesson', lesson.id, 'isLocked:', isLocked, 'onCompleteLesson exists:', !!onCompleteLesson);
+                if (!isLocked && onCompleteLesson) {
+                  console.log('Calling onCompleteLesson with id:', lesson.id);
+                  onCompleteLesson(lesson.id);
+                }
+              }}
+              className={`relative z-10 transition-all ${
+                isLocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+              } ${lesson.current ? 'scale-110 animate-pulse drop-shadow-[0_0_20px_rgba(250,204,21,0.6)]' : ''} ${
+                !lesson.current && !lesson.completed && !isLocked ? 'scale-105 hover:scale-110 drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]' : ''
+              }`}
               disabled={isLocked}
             >
               <img 
@@ -146,6 +155,11 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
             {lesson.current && (
               <div className="mt-2 bg-gradient-to-r from-[#613873] to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
                 START
+              </div>
+            )}
+            {!lesson.current && !lesson.completed && !isLocked && (
+              <div className="mt-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-bounce">
+                ✨ Ready!
               </div>
             )}
           </div>
