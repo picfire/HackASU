@@ -67,7 +67,10 @@ export function StatsBar() {
 
 export function LeagueCard() {
   return (
-    <div className="bg-slate-800 rounded-2xl p-6">
+    <SpotlightCard 
+      className="bg-gradient-to-br from-[#613873] to-[#7a4a8f] rounded-2xl p-6 border-0"
+      spotlightColor="rgba(255, 255, 255, 0.5)"
+    >
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-white font-bold text-lg">Bronze League</h3>
         <button className="text-blue-400 text-sm font-semibold">VIEW LEAGUE</button>
@@ -81,7 +84,7 @@ export function LeagueCard() {
           <p className="text-gray-400 text-sm">You've earned 388 XP this week so far</p>
         </div>
       </div>
-    </div>
+    </SpotlightCard>
   );
 }
 
@@ -93,7 +96,10 @@ export function DailyQuests() {
   ];
 
   return (
-    <div className="bg-slate-800 rounded-2xl p-6">
+    <SpotlightCard 
+      className="bg-gradient-to-br from-[#613873] to-[#7a4a8f] rounded-2xl p-6 border-0"
+      spotlightColor="rgba(255, 255, 255, 0.5)"
+    >
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-white font-bold text-lg">Daily Quests</h3>
         <button className="text-blue-400 text-sm font-semibold">VIEW ALL</button>
@@ -117,7 +123,7 @@ export function DailyQuests() {
           </div>
         ))}
       </div>
-    </div>
+    </SpotlightCard>
   );
 }
 
