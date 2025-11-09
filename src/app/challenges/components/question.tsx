@@ -23,6 +23,7 @@ interface QuestionComponentProps {
   cachedQuestions: QuestionData[];
   onNext: () => void;
   onComplete: () => void;
+  onQuit?: () => void;
 }
 
 export function QuestionDisplay({
@@ -31,6 +32,7 @@ export function QuestionDisplay({
   cachedQuestions,
   onNext,
   onComplete,
+  onQuit,
 }: QuestionComponentProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [question, setQuestion] = useState<QuestionData | null>(null);
@@ -181,6 +183,16 @@ export function QuestionDisplay({
             </button>
           )}
         </div>
+
+        {/* Quit Button */}
+        {onQuit && (
+          <button
+            onClick={onQuit}
+            className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition"
+          >
+            ✕ Quit Challenge
+          </button>
+        )}
       </div>
     </div>
   );

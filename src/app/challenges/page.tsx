@@ -138,6 +138,11 @@ export default function Challenges() {
     }
   };
 
+  const handleQuitChallenge = () => {
+    setStage('dashboard');
+    localStorage.setItem('challengeStage', 'dashboard');
+  };
+
   const resetProgress = () => {
     if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
       // Clear all challenge data
@@ -181,6 +186,7 @@ export default function Challenges() {
         cachedQuestions={cachedQuestions}
         onNext={handleLessonNext}
         onComplete={handleLessonComplete}
+        onQuit={handleQuitChallenge}
       />
     );
   }

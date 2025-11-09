@@ -131,8 +131,8 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
               />
               <div className="absolute inset-0 flex items-center justify-center bottom-2">
                 <img 
-                  src={lesson.icon === 'key' ? keySvg.src : starSvg.src}
-                  alt={lesson.icon}
+                  src={lesson.id === 1 || lesson.id === 12 ? keySvg.src : starSvg.src}
+                  alt={lesson.id === 1 || lesson.id === 12 ? 'key' : 'star'}
                   className="w-12 h-12 object-contain"
                 />
               </div>
