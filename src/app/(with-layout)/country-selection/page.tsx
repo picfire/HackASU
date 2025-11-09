@@ -26,7 +26,12 @@ export default function CountrySelection() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
 
   const handleCountrySelect = (countryName: string) => {
-    setSelectedCountry(countryName);
+    // If clicking the same country, deselect it
+    if (selectedCountry === countryName) {
+      setSelectedCountry(null);
+    } else {
+      setSelectedCountry(countryName);
+    }
   };
 
   const handleContinue = () => {
@@ -62,14 +67,14 @@ export default function CountrySelection() {
                 hover:scale-105 hover:shadow-xl
                 ${
                   selectedCountry === country.name
-                    ? "border-teal-500 bg-teal-50 shadow-lg scale-105"
+                    ? "border-purple-500 bg-purple-50 shadow-lg scale-105"
                     : "border-gray-200 bg-white hover:border-gray-300"
                 }
               `}
             >
               {/* Selection checkmark */}
               {selectedCountry === country.name && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute top-3 right-3 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-white"
                     fill="none"
@@ -108,19 +113,13 @@ export default function CountrySelection() {
               transition-all duration-200
               ${
                 selectedCountry
-                  ? "bg-teal-500 hover:bg-teal-600 cursor-pointer shadow-lg hover:shadow-xl"
+                  ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
                   : "bg-gray-300 cursor-not-allowed"
               }
             `}
           >
             Continue
           </button>
-
-          <SignOutButton>
-            <button className="w-full py-3 px-6 rounded-xl font-semibold bg-red-500 text-white hover:bg-red-600 transition-all">
-              Sign Out
-            </button>
-          </SignOutButton>
         </div>
       </div>
     </div>

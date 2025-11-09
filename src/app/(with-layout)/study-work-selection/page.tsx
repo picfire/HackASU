@@ -20,7 +20,12 @@ export default function StudyWorkSelection() {
   }, [router]);
 
   const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
+    // If clicking the same option, deselect it
+    if (selectedOption === option) {
+      setSelectedOption(null);
+    } else {
+      setSelectedOption(option);
+    }
   };
 
   const handleContinue = () => {
