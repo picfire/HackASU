@@ -42,7 +42,7 @@ export default function StudyWorkSelection() {
   if (!selectedCountry) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-white from-0% via-purple-50 via-50% to-purple-100 to-100% p-8 flex items-center justify-center">
       <div className="max-w-2xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">

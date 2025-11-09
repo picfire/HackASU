@@ -44,7 +44,7 @@ export default function DashboardPage() {
   const dailyFact = "Did you know? In Japan, it's customary to bow when greeting someone. The depth of the bow indicates respect level.";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-8">
+    <div className="min-h-screen bg-gradient-to-b from-white from-0% via-purple-50 via-50% to-purple-100 to-100% p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-8">Your Learning Journey</h1>
 
