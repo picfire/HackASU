@@ -13,9 +13,16 @@ export async function POST(request: NextRequest) {
     const body: UserContext = await request.json();
     const { destination, university, studyField, lessonId } = body;
 
-    console.log('Received request:', { destination, university, studyField, lessonId });
+    console.log("Received request:", {
+      destination,
+      university,
+      studyField,
+      lessonId,
+    });
 
-    const client = new Anthropic();
+    const client = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
 
     const prompt = `You are a cultural education expert creating personalized lessons for the "Impulsa" platform - a Duolingo-style app for culture shock preparation.
 
@@ -43,7 +50,7 @@ Return a JSON object with this exact format:
 
 Make the answers varied and plausible. The correct answer should be educational and realistic for someone in their situation.`;
 
-    console.log('Calling Claude API...');
+    console.log("Calling Claude API...");
     const message = await client.messages.create({
       model: "claude-3-haiku-20240307",
       max_tokens: 1024,
@@ -55,7 +62,7 @@ Make the answers varied and plausible. The correct answer should be educational 
       ],
     });
 
-    console.log('Claude response received');
+    console.log("Claude response received");
 
     // Extract the text content
     const textContent = message.content[0];
@@ -63,7 +70,7 @@ Make the answers varied and plausible. The correct answer should be educational 
       throw new Error("Unexpected response type from Claude");
     }
 
-    console.log('Raw Claude response:', textContent.text);
+    console.log("Raw Claude response:", textContent.text);
 
     // Parse the JSON response
     const jsonMatch = textContent.text.match(/\{[\s\S]*\}/);
@@ -74,27 +81,29 @@ Make the answers varied and plausible. The correct answer should be educational 
     const questionData = JSON.parse(jsonMatch[0]);
 
     // Validate the parsed data
-    if (!questionData.question || !Array.isArray(questionData.answers) || !questionData.explanation) {
-      throw new Error('Invalid question data structure from Claude');
+    if (
+      !questionData.question ||
+      !Array.isArray(questionData.answers) ||
+      !questionData.explanation
+    ) {
+      throw new Error("Invalid question data structure from Claude");
     }
 
     // Ensure answers have correct and text properties
     const validAnswers = questionData.answers.every(
-      (a: any) => typeof a.text === 'string' && typeof a.correct === 'boolean'
+      (a: any) => typeof a.text === "string" && typeof a.correct === "boolean"
     );
-    
+
     if (!validAnswers) {
-      throw new Error('Invalid answer format from Claude');
+      throw new Error("Invalid answer format from Claude");
     }
 
-    console.log('Returning valid question data');
+    console.log("Returning valid question data");
     return NextResponse.json(questionData);
   } catch (error) {
     console.error("Error generating questions:", error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: 500 }
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
