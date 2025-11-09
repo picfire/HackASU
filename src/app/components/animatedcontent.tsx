@@ -57,12 +57,12 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
       ease,
       delay,
       onComplete,
-      scrollTrigger: {
-        trigger: el,
-        start: `top ${startPct}%`,
-        toggleActions: 'play none none none',
-        once: true
-      }
+      // scrollTrigger: {
+      //   trigger: el,
+      //   start: `top ${startPct}%`,
+      //   toggleActions: 'play none none none',
+      //   once: true
+      // }
     });
 
     return () => {

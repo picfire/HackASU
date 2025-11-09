@@ -13,6 +13,14 @@ const config: Config = {
         foreground: "var(--foreground)",
         "purple_background": "#CB9EF0"
       },
+      keyframes: {
+        slow_spin: {
+          '100%': { transform: 'rotate(360deg)' }
+        }
+      },
+      animation: {
+        'slow_spin' : 'slow_spin 120s linear infinite'
+      }
     },
   },
   plugins: [
