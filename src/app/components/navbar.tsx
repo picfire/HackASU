@@ -10,7 +10,7 @@ export default function Navbar() {
   if (!isLoaded) return null;
 
   return (
-    <div className="navbar bg-white shadow-sm px-4 py-2 flex justify-between items-center">
+    <div className="navbar bg-transparent px-4 py-2 flex justify-between items-center">
       <div className="flex items-center gap-2">
         <a className="btn btn-ghost text-xl" onClick={() => router.push("/")}>
           Home

@@ -8,7 +8,7 @@ export default function HomePage() {
   if (!isLoaded) return null; // Wait until Clerk finishes loading
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 gap-8">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8">
       {/* Centered logo */}
       <img src="/Impulsa.svg" alt="Impulsa Logo" className="w-300 h-300" />
 
