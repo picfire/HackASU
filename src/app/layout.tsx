@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={titillium.className}>
-        <body className="antialiased text-black" suppressHydrationWarning>
+        <body className="antialiased" suppressHydrationWarning>
           <main>{children}</main>
         </body>
       </html>
