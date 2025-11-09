@@ -118,7 +118,7 @@ export default function ClaudeChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl shadow-2xl flex flex-col z-50 border-4 border-purple-500">
+        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border-4 border-purple-500">
           {/* Header */}
           <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-4 rounded-t-xl flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -134,7 +134,7 @@ export default function ClaudeChat() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition"
+              className="text-black hover:bg-black hover:bg-opacity-20 rounded-full p-2 transition"
             >
               <svg
                 className="w-6 h-6"
@@ -153,7 +153,7 @@ export default function ClaudeChat() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-purple-50 to-pink-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white">
             {messages.map((message, index) => (
               <div
                 key={index}
