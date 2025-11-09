@@ -10,7 +10,7 @@ export default function AboutPage() {
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <Image
-              src="/ImpulsaLogo.png"
+              src="/Impulsa.svg"
               alt="Impulsa Logo"
               width={200}
               height={125}
@@ -35,9 +35,9 @@ export default function AboutPage() {
             <p className="text-gray-700 text-lg leading-relaxed">
               Impulsa is an innovative platform designed to help students and
               professionals adapt to studying or working abroad. We understand
-              that moving to a new country brings excitement and
-              challenges—especially culture shock. Our mission is to turn that
-              initial confusion into confident cultural understanding.
+              that moving to a new country brings excitement and challenges
+              especially culture shock. Our mission is to turn that initial
+              confusion into confident cultural understanding.
             </p>
           </section>
 
@@ -208,7 +208,7 @@ export default function AboutPage() {
                   Lakshya Dhingra
                 </h3>
                 <p className="text-purple-600 font-semibold mb-4">
-                  FullStack Developer
+                  Full-Stack Developer
                 </p>
                 <div className="flex justify-center gap-4">
                   <a
@@ -257,7 +257,7 @@ export default function AboutPage() {
                   Matthew Cruz
                 </h3>
                 <p className="text-purple-600 font-semibold mb-4">
-                  FullStack Developer
+                  Full-Stack Developer
                 </p>
                 <div className="flex justify-center gap-4">
                   <a
@@ -306,7 +306,7 @@ export default function AboutPage() {
                   Gerardo Aguilar Roses
                 </h3>
                 <p className="text-purple-600 font-semibold mb-4">
-                  FullStack Developer
+                  Full-Stack Developer
                 </p>
                 <div className="flex justify-center gap-4">
                   <a
