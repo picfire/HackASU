@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import AnimatedContent from "../components/animatedcontent";
 
 interface Post {
   id: number;
@@ -108,6 +109,18 @@ export default function ForumPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 p-8">
+        <AnimatedContent
+          distance={50}
+          direction="vertical"
+          reverse={false}
+          duration={1.1}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          scale={1}
+          threshold={1}
+          delay={0.2}
+        >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -235,6 +248,7 @@ export default function ForumPage() {
           </div>
         </div>
       </div>
+      </AnimatedContent>
     </div>
   );
 }

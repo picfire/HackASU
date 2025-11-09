@@ -12,6 +12,10 @@ const titillium = Titillium_Web({
 
 export const metadata: Metadata = {
   title: "Impulsa",
+  description: "Impulsa is an innovative platform designed to help students and professionals adapt to studying or working abroad. We understand that moving to a new country brings excitement and challenges especially culture shock. Our mission is to turn that initial confusion into confident cultural understanding.",
+  icons: {
+    icon: "/favicon.png",
+  }
 };
 
 export default function RootLayout({

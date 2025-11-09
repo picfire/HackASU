@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <div
-      className="navbar px-4 py-2 flex justify-between items-center"
+      className="navbar shadow-lg px-4 py-2 flex justify-between items-center"
       style={{
         background:
           "radial-gradient(circle, #b778e0 50%, #9454BF 75%, #9454BF 100%)",
