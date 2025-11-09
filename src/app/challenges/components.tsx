@@ -112,7 +112,8 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
       <div className="flex flex-col items-center gap-1 py-5">
         {lessons.map((lesson, index) => {
           const currentLesson = lessons.find(l => l.current);
-          const isLocked = !lesson.completed && !lesson.current && currentLesson && currentLesson.id < lesson.id - 1;
+          // Only the current lesson is clickable. Everything else is locked.
+          const isLocked = lesson.id !== currentLesson?.id;
           
           return (
           <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-96' : '-ml-52'}`}>
@@ -152,14 +153,19 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
             </button>
             
             {/* Label */}
-            {lesson.current && (
+            {lesson.current && lesson.type === 'start' && (
               <div className="mt-2 bg-gradient-to-r from-[#613873] to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
                 START
               </div>
             )}
-            {!lesson.current && !lesson.completed && !isLocked && (
-              <div className="mt-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-bounce">
-                ✨ Ready!
+            {lesson.current && lesson.type !== 'start' && (
+              <div className="mt-2 bg-gradient-to-r from-[#613873] to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
+                Begin →
+              </div>
+            )}
+            {lesson.completed && (
+              <div className="mt-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                ✓ Complete
               </div>
             )}
           </div>

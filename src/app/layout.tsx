@@ -3,7 +3,6 @@ import { Titillium_Web } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import type { Metadata } from "next";
-import Navbar from "./components/navbar"; // ← Add this import
 
 const titillium = Titillium_Web({
   weight: ["400", "700"],
@@ -23,7 +22,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={titillium.className}>
         <body className="antialiased" suppressHydrationWarning>
-          <Navbar /> {/* ← Add this line */}
           <main>{children}</main>
         </body>
       </html>
