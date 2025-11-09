@@ -8,7 +8,7 @@ export function Header() {
     <header className="tab-header">
       <div className="flex items-center justify-start pl-6">
         <div className="flex items-center gap-4">
-          <button className="text-blue-400 hover:text-blue-300">
+          <button className="back-button">
             ← Back
           </button>
           <div>

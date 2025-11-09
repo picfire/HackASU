@@ -28,6 +28,9 @@
     left: 50%;
     transform: translateX(-50%);
 }
+.back-button {
+    color: #ffffff;
+}
 
 .lesson-locked::after {
     content: '🔒';
