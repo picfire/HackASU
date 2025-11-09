@@ -1,6 +1,7 @@
 // Components for the Challenges page
 import './page.css';
 import { useEffect, useRef } from 'react';
+import buttonSvg from './assets/button.svg';
 
 export function Header() {
   return (
@@ -113,26 +114,33 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
           const isLocked = !lesson.completed && !lesson.current && lessons.findIndex(l => l.current) < lesson.id - 1;
           
           return (
-          <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-24' : 'ml-24'}`}>
-            {/* Lesson Circle */}
-            <div 
+          <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-96' : '-ml-52'}`}>
+            {/* Lesson Button SVG */}
+            <button
               onClick={() => (lesson.current && onCompleteLesson) && onCompleteLesson(lesson.id)}
-              className={`lesson-node relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all cursor-pointer
-              ${lesson.current 
-                ? 'pulse glow bg-gradient-to-br from-[#613873] to-[#7a4a8f] shadow-lg shadow-[#613873]/50 scale-110' 
-                : lesson.completed 
-                  ? 'bg-gradient-to-br from-[#613873] to-[#7a4a8f]' 
-                  : isLocked
-                  ? 'bg-gray-600 opacity-50 cursor-not-allowed lesson-locked'
-                  : 'bg-[#613873] hover:bg-[#7a4a8f]'
-              }`}>
+              className={`relative z-10 transition-all cursor-pointer ${
+                isLocked ? 'cursor-not-allowed opacity-50' : ''
+              } ${lesson.current ? 'scale-110 animate-pulse' : ''}`}
+              disabled={isLocked}
+            >
+              <img 
+                src={buttonSvg.src} 
+                alt="lesson" 
+                className={`w-24 h-24 transition-all ${
+                  lesson.current 
+                    ? 'drop-shadow-lg' 
+                    : ''
+                }`}
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-3xl bottom-2">
+                {lesson.icon}
+              </div>
               {lesson.current && (
                 <div className="absolute -top-3 -right-3 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold animate-pulse">
                   ⚡
                 </div>
               )}
-              <span>{lesson.icon}</span>
-            </div>
+            </button>
             
             {/* Label */}
             {lesson.current && (
