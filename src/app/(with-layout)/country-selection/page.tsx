@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useUser, SignOutButton } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 // Country data with flag emojis

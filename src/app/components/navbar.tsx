@@ -11,23 +11,31 @@ export default function Navbar() {
   if (!isLoaded) return null;
 
   return (
-    <div className="navbar bg-gradient-to-b from-pink-50 to-white px-4 py-2 flex justify-between items-center shadow-md text-sm">
+    <div className="navbar bg-transparent px-4 py-2 flex justify-between items-center">
       {/* Left side: logo + links */}
-      <div className="flex items-center gap-4 ">
+      <div className="flex items-center gap-4">
         <Image src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
+
         <button
-          className="px-4 py-2 font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
           onClick={() => router.push("/")}
         >
           Home
         </button>
 
+        <button
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+          onClick={() => router.push("/about")}
+        >
+          About
+        </button>
+
         {isSignedIn && (
           <button
-            className="px-4 py-2 font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
             onClick={() => router.push("/country-selection")}
           >
-            Explore
+            Get Started
           </button>
         )}
       </div>
@@ -36,7 +44,7 @@ export default function Navbar() {
       <div>
         {isSignedIn && (
           <SignOutButton>
-            <button className="px-4 py-2 font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500">
+            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500">
               Sign Out
             </button>
           </SignOutButton>
