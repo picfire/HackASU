@@ -25,8 +25,8 @@ export default function AboutPage() {
               <Image
                 src="/Impulsa.svg"
                 alt="Impulsa Logo"
-                width={200}
-                height={125}
+                width={450}
+                height={250}
                 className="object-contain"
               />
             </div>

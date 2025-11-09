@@ -5,6 +5,36 @@ import buttonSvg from './assets/button.svg';
 import starSvg from './assets/Star.svg';
 import keySvg from './assets/Key.svg';
 
+interface UserProfileProps {
+  destination: string;
+  university: string;
+  studyField: string;
+}
+
+export function UserProfile({ destination, university, studyField }: UserProfileProps) {
+  return (
+    <div className="bg-gradient-to-br from-[#613873] to-[#7a4a8f] rounded-2xl p-6 text-white mb-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-2xl font-bold">Your Profile</h3>
+        <div className="text-4xl">👤</div>
+      </div>
+      <div className="space-y-3">
+        <div>
+          <p className="text-sm opacity-80">Destination</p>
+          <p className="text-lg font-semibold">{destination}</p>
+        </div>
+        <div>
+          <p className="text-sm opacity-80">University</p>
+          <p className="text-lg font-semibold">{university}</p>
+        </div>
+        <div>
+          <p className="text-sm opacity-80">Field of Study</p>
+          <p className="text-lg font-semibold">{studyField}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 export function StatsBar() {
