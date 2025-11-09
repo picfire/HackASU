@@ -164,7 +164,7 @@ export default function UniversitySelection() {
   if (!selectedCountry) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-blue-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-purple-50 to-blue-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -188,14 +188,14 @@ export default function UniversitySelection() {
                 hover:scale-105 hover:shadow-xl
                 ${
                   selectedUniversity === university.name
-                    ? "border-teal-500 bg-teal-50 shadow-xl scale-105"
+                    ? "border-purple-500 bg-purple-50 shadow-xl scale-105"
                     : "border-gray-200 bg-white hover:border-gray-300"
                 }
               `}
             >
               {/* Selection checkmark */}
               {selectedUniversity === university.name && (
-                <div className="absolute top-4 right-4 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
                   <svg
                     className="w-5 h-5 text-white"
                     fill="none"
@@ -239,7 +239,7 @@ export default function UniversitySelection() {
               transition-all duration-300
               ${
                 selectedUniversity
-                  ? "bg-teal-500 hover:bg-teal-600 cursor-pointer shadow-lg hover:shadow-xl"
+                  ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
                   : "bg-gray-300 cursor-not-allowed"
               }
             `}
