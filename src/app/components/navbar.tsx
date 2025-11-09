@@ -36,6 +36,15 @@ export default function Navbar() {
             Get Started
           </button>
         )}
+
+        {isSignedIn && (
+          <button
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
+            onClick={() => router.push("/challenges")}
+          >
+            Challenges
+          </button>
+        )}
       </div>
 
       {/* Middle: logo with half circle background */}
