@@ -14,10 +14,11 @@ interface AllQuestionsLoaderProps {
     university: string;
     studyField: string;
   };
+  currentSection: string;
   onComplete: (questions: QuestionData[]) => void;
 }
 
-export function AllQuestionsLoader({ userContext, onComplete }: AllQuestionsLoaderProps) {
+export function AllQuestionsLoader({ userContext, currentSection, onComplete }: AllQuestionsLoaderProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +33,7 @@ export function AllQuestionsLoader({ userContext, onComplete }: AllQuestionsLoad
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(userContext),
+          body: JSON.stringify({ ...userContext, section: currentSection }),
         });
 
         if (!response.ok) {

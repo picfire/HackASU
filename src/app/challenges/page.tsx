@@ -46,6 +46,7 @@ export default function Challenges() {
 
   const [lessons, setLessons] = useState(initialLessons);
   const [sectionProgress, setSectionProgress] = useState<Record<string, any[]>>({});
+  const [cachedQuestionsBySection, setCachedQuestionsBySection] = useState<Record<string, QuestionData[]>>({});
 
   // Load persisted state on mount
   useEffect(() => {
@@ -53,14 +54,14 @@ export default function Challenges() {
     const savedStage = localStorage.getItem('challengeStage');
     const savedLesson = localStorage.getItem('currentLesson');
     const savedLessons = localStorage.getItem('lessonsProgress');
-    const cachedQuestions = localStorage.getItem('cachedQuestions');
     const savedSectionProgress = localStorage.getItem('sectionProgress');
+    const savedCachedQuestionsBySection = localStorage.getItem('cachedQuestionsBySection');
 
     if (savedUserContext) {
       setUserContext(JSON.parse(savedUserContext));
     }
-    if (cachedQuestions) {
-      setCachedQuestions(JSON.parse(cachedQuestions));
+    if (savedCachedQuestionsBySection) {
+      setCachedQuestionsBySection(JSON.parse(savedCachedQuestionsBySection));
     }
     if (savedStage) {
       setStage(savedStage as 'survey' | 'loading' | 'questions' | 'dashboard');
@@ -78,6 +79,13 @@ export default function Challenges() {
     setIsHydrated(true);
   }, []);
 
+  // Update cached questions when section changes
+  useEffect(() => {
+    if (cachedQuestionsBySection[currentSection]) {
+      setCachedQuestions(cachedQuestionsBySection[currentSection]);
+    }
+  }, [currentSection, cachedQuestionsBySection]);
+
   const handleSurveyComplete = (data: UserContext) => {
     setUserContext(data);
     setStage('loading');
@@ -87,6 +95,13 @@ export default function Challenges() {
 
   const handleQuestionsLoaded = (questions: QuestionData[]) => {
     setCachedQuestions(questions);
+    // Cache questions per section
+    const newCache = {
+      ...cachedQuestionsBySection,
+      [currentSection]: questions
+    };
+    setCachedQuestionsBySection(newCache);
+    localStorage.setItem('cachedQuestionsBySection', JSON.stringify(newCache));
     setStage('questions');
     localStorage.setItem('challengeStage', 'questions');
   };
@@ -144,13 +159,29 @@ export default function Challenges() {
     setCurrentLesson(id);
     localStorage.setItem('currentLesson', id.toString());
     
+    // Check if we have cached questions for this section
+    const questionsForSection = cachedQuestionsBySection[currentSection];
+    
     // Go to questions stage to display the questions
-    if (cachedQuestions.length > 0) {
-      console.log('Setting stage to questions with', cachedQuestions.length, 'cached questions');
+    if (questionsForSection && questionsForSection.length > 0) {
+      console.log('Setting stage to questions with', questionsForSection.length, 'cached questions for section:', currentSection);
+      setCachedQuestions(questionsForSection);
       setStage('questions');
       localStorage.setItem('challengeStage', 'questions');
     } else {
-      console.log('No cached questions!');
+      console.log('No cached questions for section:', currentSection, '- reloading...');
+      setStage('loading');
+      localStorage.setItem('challengeStage', 'loading');
+    }
+  };
+
+  const handleSectionNeedsReload = () => {
+    // When switching sections, if there are no cached questions for the new section,
+    // trigger a reload
+    if (!cachedQuestionsBySection[currentSection]) {
+      console.log('Section has no cached questions, triggering reload...');
+      setStage('loading');
+      localStorage.setItem('challengeStage', 'loading');
     }
   };
 
@@ -168,6 +199,7 @@ export default function Challenges() {
       localStorage.removeItem('lessonsProgress');
       localStorage.removeItem('cachedQuestions');
       localStorage.removeItem('sectionProgress');
+      localStorage.removeItem('cachedQuestionsBySection');
       
       // Reset to initial state
       setStage('survey');
@@ -176,6 +208,7 @@ export default function Challenges() {
       setCurrentLesson(1);
       setLessons(initialLessons);
       setSectionProgress({});
+      setCachedQuestionsBySection({});
     }
   };
 
@@ -191,6 +224,7 @@ export default function Challenges() {
     return (
       <AllQuestionsLoader
         userContext={userContext}
+        currentSection={currentSection}
         onComplete={handleQuestionsLoaded}
       />
     );
@@ -230,6 +264,7 @@ export default function Challenges() {
             <SectionsDock 
               currentSection={currentSection} 
               onSectionChange={setCurrentSection}
+              onNeedsReload={handleSectionNeedsReload}
             />
           </div>
         </AnimatedContent>
