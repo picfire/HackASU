@@ -199,30 +199,43 @@ export default function Challenges() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[280px_1fr_400px] gap-6 p-6">
         {/* Left Sidebar - Sections Dock */}
-        <div className="hidden lg:block">
-          <SectionsDock 
-            currentSection={currentSection} 
-            onSectionChange={setCurrentSection}
-          />
-        </div>
-
-        {/* Main Timeline Area */}
-        {/* <AnimatedContent
-          distance={150}
+        <AnimatedContent
+          distance={100}
           direction="horizontal"
-          reverse={true}
-          duration={1.6}
+          reverse={false}
+          duration={1.0}
           ease="power3.out"
           initialOpacity={0}
           animateOpacity
           scale={1}
           threshold={0.3}
-          delay={0.2}
-        >   */}
+          delay={0.1}
+        >
+          <div className="hidden lg:block">
+            <SectionsDock 
+              currentSection={currentSection} 
+              onSectionChange={setCurrentSection}
+            />
+          </div>
+        </AnimatedContent>
+
+        {/* Main Timeline Area */}
+        <AnimatedContent
+          distance={100}
+          direction="vertical"
+          reverse={false}
+          duration={1.2}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          scale={1}
+          threshold={0.3}
+          delay={0.15}
+        >
           <div>
             <LessonTimeline lessons={sectionLessons[currentSection as keyof typeof sectionLessons]} onCompleteLesson={completeLesson} />
           </div>
-        {/* </AnimatedContent> */}
+        </AnimatedContent>
 
         {/* Right Sidebar */}
         <AnimatedContent
