@@ -43,7 +43,7 @@ export default function CountrySelection() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 p-8">
+    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-11">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

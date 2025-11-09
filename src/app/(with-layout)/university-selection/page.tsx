@@ -164,7 +164,7 @@ export default function UniversitySelection() {
   if (!selectedCountry) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-purple-50 to-blue-50 p-8">
+    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

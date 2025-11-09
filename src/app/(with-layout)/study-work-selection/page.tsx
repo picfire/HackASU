@@ -42,7 +42,7 @@ export default function StudyWorkSelection() {
   if (!selectedCountry) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-8 flex items-center justify-center">
       <div className="max-w-2xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -89,12 +89,12 @@ export default function StudyWorkSelection() {
             </p>
           </button>
 
-          <button
+          <button 
+            disabled
             onClick={() => handleOptionSelect("work")}
             className={`
               relative p-8 rounded-2xl border-2 transition-all duration-300
               flex flex-col items-center justify-center gap-4
-              hover:scale-105 hover:shadow-2xl
               ${
                 selectedOption === "work"
                   ? "border-purple-500 bg-purple-50 shadow-xl scale-105"
