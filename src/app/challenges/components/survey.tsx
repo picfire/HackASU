@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface SurveyData {
   destination: string;
@@ -14,26 +14,28 @@ interface SurveyProps {
 
 export function Survey({ onComplete }: SurveyProps) {
   const [formData, setFormData] = useState<SurveyData>({
-    destination: '',
-    university: '',
-    studyField: '',
+    destination: "",
+    university: "",
+    studyField: "",
   });
 
   useEffect(() => {
     // Get country and university from localStorage
-    const country = localStorage.getItem('selectedCountry') || '';
-    const university = localStorage.getItem('selectedUniversity') || '';
-    
-    setFormData(prev => ({
+    const country = localStorage.getItem("selectedCountry") || "";
+    const university = localStorage.getItem("selectedUniversity") || "";
+
+    setFormData((prev) => ({
       ...prev,
       destination: country,
       university: university,
     }));
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -43,7 +45,7 @@ export function Survey({ onComplete }: SurveyProps) {
     e.preventDefault();
     if (formData.destination && formData.university && formData.studyField) {
       // Save questions to localStorage while loading
-      localStorage.setItem('loadingQuestions', 'true');
+      localStorage.setItem("loadingQuestions", "true");
       onComplete(formData);
     }
   };
@@ -52,8 +54,10 @@ export function Survey({ onComplete }: SurveyProps) {
     <div className="min-h-screen bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-[#613873] mb-2">Impulsa</h1>
-        <p className="text-gray-600 mb-6">Let's personalize your learning experience</p>
-        
+        <p className="text-gray-600 mb-6">
+          Let's personalize your learning experience
+        </p>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -93,7 +97,7 @@ export function Survey({ onComplete }: SurveyProps) {
               value={formData.studyField}
               onChange={handleChange}
               placeholder="e.g., Computer Science, Business, Medicine"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#613873]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 cursor-not-allowed"
               required
             />
           </div>
