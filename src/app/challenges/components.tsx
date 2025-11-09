@@ -155,15 +155,15 @@ interface LessonNode {
 
 export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonNode[], onCompleteLesson?: (id: number) => void }) {
   return (
-    <div className="relative flex flex-col items-center">
-      <div className="flex flex-col items-center gap-1 py-5">
+    <div className="relative flex flex-col items-center w-full">
+      <div className="flex flex-col items-center gap-1 py-5 w-full max-w-[280px] mx-auto">
         {lessons.map((lesson, index) => {
           const currentLesson = lessons.find(l => l.current);
           // Only the current lesson is clickable. Everything else is locked.
           const isLocked = lesson.id !== currentLesson?.id;
           
           return (
-          <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? '-ml-96' : '-ml-52'}`}>
+          <div key={lesson.id} className={`relative flex flex-col items-center ${index % 2 === 0 ? 'self-start' : 'self-end'}`}>
             {/* Lesson Button SVG */}
             <button
               onClick={() => {
