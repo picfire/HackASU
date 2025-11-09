@@ -34,12 +34,6 @@ export default function Navbar() {
       <div>
         {isSignedIn && (
           <>
-            <button
-              className="btn btn-outline"
-              onClick={() => router.push("/country-selection")}
-            >
-              Country Selection
-            </button>
             <SignOutButton>
               <button className="btn btn-outline">Sign Out</button>
             </SignOutButton>
