@@ -64,7 +64,7 @@ export default function HomePage() {
         {isSignedIn ? (
           <button
             onClick={() => router.push("/country-selection")}
-            className="bg-purple-500 text-white px-8 py-4 rounded-lg transition hover:bg-teal-600 font-semibold text-lg shadow-lg hover:shadow-xl"
+            className="bg-purple-500 text-white px-8 py-4 rounded-lg transition hover:bg-purple-600 font-semibold text-lg shadow-lg hover:shadow-xl"
           >
             Get Started
           </button>
