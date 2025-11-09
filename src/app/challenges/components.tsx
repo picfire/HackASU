@@ -54,10 +54,14 @@ export function StatsBar() {
   return (
     <div className="flex gap-4 justify-end">
       {stats.map((stat, index) => (
-        <div key={index} className="stat-badge bg-slate-800 rounded-xl px-4 py-2 flex items-center gap-2">
+        <SpotlightCard 
+          key={index} 
+          className="stat-badge bg-gradient-to-br from-[#613873] to-[#7a4a8f] rounded-xl px-4 py-2 flex items-center gap-2 border-0"
+          spotlightColor="rgba(255, 255, 255, 0.5)"
+        >
           <span className="text-2xl">{stat.icon}</span>
           <span className="text-white font-bold">{stat.value}</span>
-        </div>
+        </SpotlightCard>
       ))}
     </div>
   );
