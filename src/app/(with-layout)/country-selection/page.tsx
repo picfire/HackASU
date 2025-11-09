@@ -17,7 +17,6 @@ const countries = [
   { name: "Italy", flag: "🇮🇹", info: "Art & history" },
   { name: "South Korea", flag: "🇰🇷", info: "Tech leader" },
   { name: "Netherlands", flag: "🇳🇱", info: "Progressive" },
-  { name: "India", flag: "🇮🇳", info: "Best country" },
   { name: "Other", flag: "🌍", info: "Other destination" },
 ];
 
@@ -34,9 +33,8 @@ export default function CountrySelection() {
     if (!selectedCountry) return;
 
     localStorage.setItem("selectedCountry", selectedCountry);
-    alert(`You selected ${selectedCountry}! Ready to explore.`);
-    // TODO: Navigate to dashboard
-    // router.push("/dashboard");
+    // Redirect to study/work selection
+    router.push("/study-work-selection");
   };
 
   return (
