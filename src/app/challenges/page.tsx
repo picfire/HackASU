@@ -205,7 +205,7 @@ export default function Challenges() {
             onClick={resetProgress}
             className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition"
           >
-            🔄 Reset Progress (Debug)
+            Reset Progress (Debug)
           </button>
         </div>
       </div>
