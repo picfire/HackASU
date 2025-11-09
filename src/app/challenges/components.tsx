@@ -6,15 +6,8 @@ import buttonSvg from './assets/button.svg';
 export function Header() {
   return (
     <header className="tab-header">
-      <div className="flex items-center justify-start pl-6">
-        <div className="flex items-center gap-4">
-          <button className="back-button">
-            ← Back
-          </button>
-          <div>
-            <h1 className="text-xl font-bold text-white">Challenges</h1>
-          </div>
-        </div>
+      <div className="flex items-center justify-center pl-6">
+        <img src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
       </div>
     </header>
   );

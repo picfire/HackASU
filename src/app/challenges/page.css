@@ -5,14 +5,6 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-
-.tab-header {
-    background-color: #9454BF;
-    background: radial-gradient(circle, #b778e0 50%, #9454BF 75%, #9454BF 100%);
-    border-bottom: 1px solid #334155;
-    padding: 1.2rem;
-}
-
 .lesson-node {
     background-color: #613873;
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import './page.css';
-import { Header, StatsBar, LeagueCard, DailyQuests, LessonTimeline } from './components';
+import { StatsBar, LeagueCard, DailyQuests, LessonTimeline } from './components';
 import { Survey } from './components/survey';
 import { QuestionDisplay } from './components/question';
 import { AllQuestionsLoader } from './components/allQuestionsLoader';
@@ -187,7 +187,6 @@ export default function Challenges() {
 
   return (
     <div className="background-challenges">
-      <Header />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
         {/* Main Timeline Area */}
