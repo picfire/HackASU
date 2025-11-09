@@ -5,9 +5,11 @@
 body {
   /* font-family: Arial, Helvetica, sans-serif; */
   
-  background: #ffffff;
-  background: radial-gradient(circle, rgba(255, 255, 255, 1) 19%, rgba(247, 222, 255, 1) 46%, rgba(238, 174, 202, 1) 100%);
+  background: #FFFFFF;
+  background: radial-gradient(circle,rgba(255, 255, 255, 1) 38%, rgba(221, 207, 233, 1) 75%, rgba(203, 158, 240, 1) 100%);
   color: rgb(27, 27, 27);
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 ::-webkit-scrollbar { /* Hide the scrollbar Lakshya */
