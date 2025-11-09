@@ -45,11 +45,10 @@ export function SectionsDock({ currentSection, onSectionChange }: SectionsDockPr
             spotlightColor="rgba(255, 255, 255, 0.5)"
           >
             <div className="p-4">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3">
               <span className="text-3xl">{section.icon}</span>
               <h3 className="text-white font-bold text-lg">{section.name}</h3>
             </div>
-            <p className="text-white text-sm opacity-80">{section.description}</p>
             {currentSection === section.id && (
               <div className="mt-3 flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
