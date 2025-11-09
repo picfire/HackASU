@@ -23,9 +23,15 @@ export async function POST(request: NextRequest) {
     const body: UserContext = await request.json();
     const { destination, university, studyField } = body;
 
-    console.log('Received request for all questions:', { destination, university, studyField });
+    console.log("Received request for all questions:", {
+      destination,
+      university,
+      studyField,
+    });
 
-    const client = new Anthropic();
+    const client = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
 
     // Generate all 12 questions at once
     const prompt = `You are a cultural education expert creating personalized lessons for the "Impulsa" platform - a Duolingo-style app for culture shock preparation.
@@ -56,7 +62,7 @@ Return a JSON array with exactly 12 question objects, each with this format:
 
 Make the answers varied and plausible. Ensure each correct answer is educational and realistic for someone in their situation. Vary the topics across the 12 questions to cover different aspects of university life and culture shock.`;
 
-    console.log('Calling Claude API to generate all questions...');
+    console.log("Calling Claude API to generate all questions...");
     const message = await client.messages.create({
       model: "claude-3-haiku-20240307",
       max_tokens: 4096,
@@ -68,7 +74,7 @@ Make the answers varied and plausible. Ensure each correct answer is educational
       ],
     });
 
-    console.log('Claude response received');
+    console.log("Claude response received");
 
     // Extract the text content
     const textContent = message.content[0];
@@ -76,12 +82,15 @@ Make the answers varied and plausible. Ensure each correct answer is educational
       throw new Error("Unexpected response type from Claude");
     }
 
-    console.log('Raw Claude response length:', textContent.text.length);
+    console.log("Raw Claude response length:", textContent.text.length);
 
     // Parse the JSON response
     const jsonMatch = textContent.text.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
-      console.error('Could not find JSON array in response:', textContent.text.substring(0, 500));
+      console.error(
+        "Could not find JSON array in response:",
+        textContent.text.substring(0, 500)
+      );
       throw new Error("Could not parse JSON array from Claude response");
     }
 
@@ -103,27 +112,27 @@ Make the answers varied and plausible. Ensure each correct answer is educational
       }
 
       const validAnswers = q.answers.every(
-        (a: any) => typeof a.text === 'string' && typeof a.correct === 'boolean'
+        (a: any) => typeof a.text === "string" && typeof a.correct === "boolean"
       );
-      
+
       if (!validAnswers) {
         throw new Error(`Question ${index + 1} has invalid answer format`);
       }
 
       const correctCount = q.answers.filter((a: any) => a.correct).length;
       if (correctCount !== 1) {
-        throw new Error(`Question ${index + 1} should have exactly 1 correct answer`);
+        throw new Error(
+          `Question ${index + 1} should have exactly 1 correct answer`
+        );
       }
     });
 
-    console.log('All 12 questions validated successfully');
+    console.log("All 12 questions validated successfully");
     return NextResponse.json({ questions: questionsData });
   } catch (error) {
     console.error("Error generating questions:", error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: 500 }
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
