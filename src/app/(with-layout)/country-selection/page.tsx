@@ -17,6 +17,7 @@ const countries = [
   { name: "Italy", flag: "🇮🇹", info: "Art & history" },
   { name: "South Korea", flag: "🇰🇷", info: "Tech leader" },
   { name: "Netherlands", flag: "🇳🇱", info: "Progressive" },
+  { name: "India", flag: "🇮🇳", info: "Best country" },
   { name: "Other", flag: "🌍", info: "Other destination" },
 ];
 
