@@ -9,13 +9,9 @@ export function Header() {
             ← Back
           </button>
           <div>
-            <p className="text-sm text-gray-400">SECTION 2, UNIT 1</p>
-            <h1 className="text-xl font-bold text-white">Ask for directions</h1>
+            <h1 className="text-xl font-bold text-white">Challenges</h1>
           </div>
         </div>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">
-          📖 GUIDEBOOK
-        </button>
       </div>
     </header>
   );
@@ -133,11 +129,6 @@ export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
       <div className="flex flex-col items-center gap-8 py-12">
         {lessons.map((lesson, index) => (
           <div key={lesson.id} className="relative flex flex-col items-center">
-            {/* Connecting Line */}
-            {index < lessons.length - 1 && (
-              <div className="absolute top-16 w-1 h-20 bg-slate-700"></div>
-            )}
-            
             {/* Lesson Circle */}
             <div className={`lesson-node relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all cursor-pointer
               ${lesson.current 
@@ -164,18 +155,7 @@ export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
         ))}
       </div>
 
-      {/* Character/Mascot */}
-      <div className="mascot absolute right-10 top-32 w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-4xl transform hover:scale-110 transition-transform">
-        🦉
-      </div>
-      
-      {/* Fire/Streak Icon */}
-      <div className="fire-icon absolute right-16 top-64 text-5xl">
-        🔥
-      </div>
-
-      {/* Bottom Text */}
-      <div className="text-center mt-12">
+      <div className="text-center mt-12"> {/* this the bottom text */}
         <p className="text-gray-400 text-lg">Talk about your hometown</p>
         <button className="mt-6 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-semibold">
           JUMP HERE?

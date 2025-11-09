@@ -20,8 +20,8 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={titillium.className} suppressHydrationWarning>
-        <body className="antialiased text-black">
+      <html lang="en" className={titillium.className}>
+        <body className="antialiased text-black" suppressHydrationWarning>
           <main>{children}</main>
         </body>
       </html>

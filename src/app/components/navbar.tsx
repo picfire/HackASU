@@ -15,14 +15,16 @@ export default function Navbar() {
       {/* Left side: logo + links */}
       <div className="flex items-center gap-4">
         <Image src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
-        <a className="btn btn-ghost text-xl" onClick={() => router.push("/")}>
+        <button
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+          onClick={() => router.push("/")}
+        >
           Home
-        </a>
+        </button>
 
-        {/* Move Country Selection next to Home */}
         {isSignedIn && (
           <button
-            className="btn btn-outline"
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
             onClick={() => router.push("/country-selection")}
           >
             Country Selection
@@ -33,17 +35,11 @@ export default function Navbar() {
       {/* Right side: sign out */}
       <div>
         {isSignedIn && (
-          <>
-            <button
-              className="btn btn-outline"
-              onClick={() => router.push("/country-selection")}
-            >
-              Country Selection
+          <SignOutButton>
+            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500">
+              Sign Out
             </button>
-            <SignOutButton>
-              <button className="btn btn-outline">Sign Out</button>
-            </SignOutButton>
-          </>
+          </SignOutButton>
         )}
       </div>
     </div>
