@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import './page.css';
-import { Header, StatsBar, SuperPromo, LeagueCard, DailyQuests, LessonTimeline } from './components';
+import { Header, StatsBar, LeagueCard, DailyQuests, LessonTimeline } from './components';
 
 export default function Challenges() {
   const initialLessons = [
