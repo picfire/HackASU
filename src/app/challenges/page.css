@@ -1,5 +1,38 @@
 .background-challenges {
     min-height: 100vh;
-    background-color: #724A8C;
+    background: #A3AABF;
+    background: radial-gradient(circle, #A3AABF 0%, rgba(221, 207, 233, 1) 75%, #9454BF 100%);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.tab-header {
+    background-color: #9454BF;
+    background: radial-gradient(circle, #b778e0 50%, #9454BF 75%, #9454BF 100%);
+    border-bottom: 1px solid #334155;
+    padding: 1.2rem;
+}
+
+.lesson-node {
+    background-color: #613873;
+}
+
+.lesson-node.current {
+    background: linear-gradient(to bottom right, #613873, #7a4a8f);
+}
+
+.timeline-connector {
+    position: absolute;
+    width: 3px;
+    background-color: #613873;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lesson-locked::after {
+    content: '🔒';
+    position: absolute;
+    font-size: 12px;
+    bottom: -5px;
+    right: -5px;
 }
