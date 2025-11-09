@@ -60,35 +60,22 @@ export default function HomePage() {
       </AnimatedContent>
 
       {/* Simple button with NO animation wrapper */}
-      {/* <AnimatedContent
-        distance={150}
-        direction="vertical"
-        reverse={false}
-        duration={1.1}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        scale={1}
-        threshold={0.2}
-        delay={0.6}
-      > */}
-        <div>
-          {isSignedIn ? (
-            <button
-              onClick={() => router.push("/country-selection")}
-              className="bg-purple-500 text-white px-8 py-4 rounded-lg transition hover:bg-teal-600 font-semibold text-lg shadow-lg hover:shadow-xl"
-            >
-              Get Started
+      <div>
+        {isSignedIn ? (
+          <button
+            onClick={() => router.push("/country-selection")}
+            className="bg-purple-500 text-white px-8 py-4 rounded-lg transition hover:bg-purple-600 font-semibold text-lg shadow-lg hover:shadow-xl"
+          >
+            Get Started
+          </button>
+        ) : (
+          <SignInButton mode="modal">
+            <button className="bg-indigo-500 text-white px-6 py-3 rounded-lg transition hover:bg-indigo-600">
+              Sign in with Google
             </button>
-          ) : (
-            <SignInButton mode="modal">
-              <button className="bg-indigo-500 text-white px-6 py-3 rounded-lg transition hover:bg-indigo-600">
-                Sign in with Google
-              </button>
-            </SignInButton>
-          )}
-        </div>
-      {/* </ AnimatedContent> */}
+          </SignInButton>
+        )}
+      </div>
     </div>
   );
 }

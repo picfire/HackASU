@@ -27,7 +27,7 @@ export default function Navbar() {
             className="px-4 py-2 font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
             onClick={() => router.push("/country-selection")}
           >
-            Country Selection
+            Explore
           </button>
         )}
       </div>
