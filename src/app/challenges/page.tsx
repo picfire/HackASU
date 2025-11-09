@@ -31,11 +31,11 @@ export default function Challenges() {
     { id: 2, type: 'lesson', completed: false, current: false, icon: '🎯' },
     { id: 3, type: 'chest', completed: false, current: false, icon: '📦' },
     { id: 4, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 5, type: 'lesson', completed: false, current: false, icon: '💼' },
+    { id: 5, type: 'star', completed: false, current: false, icon: '⭐' },
     { id: 6, type: 'lesson', completed: false, current: false, icon: '🎯' },
     { id: 7, type: 'chest', completed: false, current: false, icon: '📦' },
     { id: 8, type: 'lesson', completed: false, current: false, icon: '🎯' },
-    { id: 9, type: 'lesson', completed: false, current: false, icon: '🌍' },
+    { id: 9, type: 'star', completed: false, current: false, icon: '⭐' },
     { id: 10, type: 'lesson', completed: false, current: false, icon: '🎯' },
     { id: 11, type: 'chest', completed: false, current: false, icon: '📦' },
     { id: 12, type: 'lesson', completed: false, current: false, icon: '🎯' },
@@ -138,6 +138,24 @@ export default function Challenges() {
     }
   };
 
+  const resetProgress = () => {
+    if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+      // Clear all challenge data
+      localStorage.removeItem('userChallengeContext');
+      localStorage.removeItem('challengeStage');
+      localStorage.removeItem('currentLesson');
+      localStorage.removeItem('lessonsProgress');
+      localStorage.removeItem('cachedQuestions');
+      
+      // Reset to initial state
+      setStage('survey');
+      setUserContext(null);
+      setCachedQuestions([]);
+      setCurrentLesson(1);
+      setLessons(initialLessons);
+    }
+  };
+
   if (!isHydrated) {
     return null; // Prevent hydration mismatch
   }
@@ -182,6 +200,14 @@ export default function Challenges() {
           <StatsBar />
           <LeagueCard />
           <DailyQuests />
+          
+          {/* Debug Reset Button */}
+          <button
+            onClick={resetProgress}
+            className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition"
+          >
+            🔄 Reset Progress (Debug)
+          </button>
         </div>
       </div>
     </div>

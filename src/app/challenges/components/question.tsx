@@ -32,6 +32,7 @@ export function QuestionDisplay({
   onNext,
   onComplete,
 }: QuestionComponentProps) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [question, setQuestion] = useState<QuestionData | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -40,15 +41,15 @@ export function QuestionDisplay({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Get question from cache
-    if (cachedQuestions && cachedQuestions.length >= lessonId) {
-      const currentQuestion = cachedQuestions[lessonId - 1];
+    // Get question from cache at current index
+    if (cachedQuestions && cachedQuestions.length > currentQuestionIndex) {
+      const currentQuestion = cachedQuestions[currentQuestionIndex];
       setQuestion(currentQuestion);
       setSelected(null);
       setSubmitted(false);
       setIsCorrect(false);
     }
-  }, [lessonId, cachedQuestions]);
+  }, [currentQuestionIndex, cachedQuestions]);
 
   const handleSubmit = () => {
     if (selected === null || !question) return;
@@ -59,12 +60,12 @@ export function QuestionDisplay({
   };
 
   const handleNext = () => {
-    if (lessonId >= 12) {
-      // Last lesson - complete the entire course
-      onComplete();
+    // Check if there are more questions
+    if (currentQuestionIndex < cachedQuestions.length - 1) {
+      // Move to next question
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Current lesson is done, mark as completed and move to dashboard
-      // The dashboard will show the next lesson as clickable
+      // All questions answered - complete the lesson
       onComplete();
     }
   };
@@ -102,11 +103,11 @@ export function QuestionDisplay({
     <div className="min-h-screen bg-gradient-to-br from-purple-300 to-purple-500 p-4 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl">
         <div className="mb-6">
-          <p className="text-sm text-gray-500 mb-2">Lesson {lessonId} of 12</p>
+          <p className="text-sm text-gray-500 mb-2">Lesson {lessonId} - Question {currentQuestionIndex + 1} of {cachedQuestions.length}</p>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-[#613873] h-2 rounded-full transition-all"
-              style={{ width: `${(lessonId / 12) * 100}%` }}
+              style={{ width: `${((currentQuestionIndex + 1) / cachedQuestions.length) * 100}%` }}
             ></div>
           </div>
         </div>
@@ -176,7 +177,7 @@ export function QuestionDisplay({
               onClick={handleNext}
               className="flex-1 bg-[#613873] hover:bg-[#7a4a8f] text-white font-bold py-2 px-4 rounded-lg transition"
             >
-              {lessonId >= 12 ? 'Complete Course!' : 'Next Question'}
+              {currentQuestionIndex === cachedQuestions.length - 1 ? 'Complete Lesson!' : 'Next Question →'}
             </button>
           )}
         </div>
