@@ -16,10 +16,15 @@ const config: Config = {
       keyframes: {
         slow_spin: {
           '100%': { transform: 'rotate(360deg)' }
-        }
+        },
+        highlight_text: {
+          '0%': { 'background-position-x': '0%' },
+          '100%': { 'background-position-x': '-100%' }
+        },
       },
       animation: {
-        'slow_spin' : 'slow_spin 120s linear infinite'
+        'slow_spin': 'slow_spin 120s linear infinite',
+        'highlight_text': 'highlight_text 1s linear'
       }
     },
   },

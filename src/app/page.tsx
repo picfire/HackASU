@@ -53,9 +53,9 @@ export default function HomePage() {
         >
           <div className="max-w-xl text-center">
             <p className="text-gray-700">
-              Impulsa helps students and professionals explore opportunities to
-              study or work abroad. Choose your destination, stay updated, and
-              make your global journey easier!
+              Impulsa helps students and professionals make the journey of
+              <span className="animate-highlight_text [animation-fill-mode:forwards] bg-[200%] bg-gradient-to-b from-transparent from-0% to-purple-100 to-100%"> studying or working abroad easier</span>. Choose your destination, stay updated, and
+              make your transition as smooth as possible.
             </p>
           </div>
         </AnimatedContent>
