@@ -1,9 +1,10 @@
 // Components for the Challenges page
+import './page.css';
 
 export function Header() {
   return (
-    <header className="bg-slate-900 border-b border-slate-700 p-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="tab-header">
+      <div className="flex items-center justify-start pl-6">
         <div className="flex items-center gap-4">
           <button className="text-blue-400 hover:text-blue-300">
             ← Back

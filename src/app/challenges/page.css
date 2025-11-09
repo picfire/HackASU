@@ -1,5 +1,12 @@
 .background-challenges {
     min-height: 100vh;
-    background-color: #724A8C;
+    background-color: #814BA6;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.tab-header {
+    background-color: #724A8C;
+    border-bottom: 1px solid #334155;
+    padding: 1.2rem;
 }
