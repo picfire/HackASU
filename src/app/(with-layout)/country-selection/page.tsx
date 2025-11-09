@@ -38,7 +38,7 @@ export default function CountrySelection() {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
-            className="p-2 border rounded focus:ring-2 focus:ring-teal-400"
+            className="bg-white p-2 border rounded focus:ring-2 focus:ring-teal-400"
           >
             <option value="">Select a country</option>
             {countries.map((c) => (
