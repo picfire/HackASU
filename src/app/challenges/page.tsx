@@ -45,6 +45,7 @@ export default function Challenges() {
   ];
 
   const [lessons, setLessons] = useState(initialLessons);
+  const [sectionProgress, setSectionProgress] = useState<Record<string, any[]>>({});
 
   // Load persisted state on mount
   useEffect(() => {
@@ -53,6 +54,7 @@ export default function Challenges() {
     const savedLesson = localStorage.getItem('currentLesson');
     const savedLessons = localStorage.getItem('lessonsProgress');
     const cachedQuestions = localStorage.getItem('cachedQuestions');
+    const savedSectionProgress = localStorage.getItem('sectionProgress');
 
     if (savedUserContext) {
       setUserContext(JSON.parse(savedUserContext));
@@ -68,6 +70,9 @@ export default function Challenges() {
     }
     if (savedLessons) {
       setLessons(JSON.parse(savedLessons));
+    }
+    if (savedSectionProgress) {
+      setSectionProgress(JSON.parse(savedSectionProgress));
     }
 
     setIsHydrated(true);
@@ -95,11 +100,13 @@ export default function Challenges() {
   };
 
   const handleLessonComplete = () => {
-    // Mark current lesson as complete and move to next
-    console.log('handleLessonComplete called, currentLesson:', currentLesson);
-    console.log('Current lessons before update:', lessons);
+    // Mark current lesson as complete and move to next for the current section
+    console.log('handleLessonComplete called, currentLesson:', currentLesson, 'currentSection:', currentSection);
     
-    const updatedLessons = lessons.map(lesson => {
+    // Get current section's lessons
+    const currentSectionLessons = sectionProgress[currentSection] || [...sectionLessons[currentSection as keyof typeof sectionLessons]];
+    
+    const updatedLessons = currentSectionLessons.map(lesson => {
       if (lesson.id === currentLesson) {
         console.log('Marking lesson', lesson.id, 'as completed');
         return { ...lesson, completed: true, current: false };
@@ -111,9 +118,15 @@ export default function Challenges() {
       return lesson;
     });
     
-    console.log('Updated lessons:', updatedLessons);
-    setLessons(updatedLessons);
-    localStorage.setItem('lessonsProgress', JSON.stringify(updatedLessons));
+    // Update section-specific progress
+    const newSectionProgress = {
+      ...sectionProgress,
+      [currentSection]: updatedLessons
+    };
+    
+    console.log('Updated section progress:', newSectionProgress);
+    setSectionProgress(newSectionProgress);
+    localStorage.setItem('sectionProgress', JSON.stringify(newSectionProgress));
     
     const nextLesson = currentLesson + 1;
     setCurrentLesson(nextLesson);
@@ -154,6 +167,7 @@ export default function Challenges() {
       localStorage.removeItem('currentLesson');
       localStorage.removeItem('lessonsProgress');
       localStorage.removeItem('cachedQuestions');
+      localStorage.removeItem('sectionProgress');
       
       // Reset to initial state
       setStage('survey');
@@ -161,6 +175,7 @@ export default function Challenges() {
       setCachedQuestions([]);
       setCurrentLesson(1);
       setLessons(initialLessons);
+      setSectionProgress({});
     }
   };
 
@@ -233,7 +248,10 @@ export default function Challenges() {
           delay={0.15}
         >
           <div>
-            <LessonTimeline lessons={sectionLessons[currentSection as keyof typeof sectionLessons]} onCompleteLesson={completeLesson} />
+            <LessonTimeline 
+              lessons={sectionProgress[currentSection] || sectionLessons[currentSection as keyof typeof sectionLessons]} 
+              onCompleteLesson={completeLesson} 
+            />
           </div>
         </AnimatedContent>
 
