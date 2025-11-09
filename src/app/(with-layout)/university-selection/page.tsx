@@ -580,7 +580,7 @@ export default function UniversitySelection() {
   if (!selectedCountry) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-purple_background p-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-purple-50 to-blue-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -627,18 +627,13 @@ export default function UniversitySelection() {
               )}
 
               {/* University Logo */}
-              <div className="w-20 h-20 relative mb-2">
+              <div className="w-20 h-20 relative mb-4">
                 <Image
                   src={university.logo}
                   alt={`${university.name} logo`}
                   fill
                   className="object-contain"
                 />
-              </div>
-
-              {/* Rank Badge */}
-              <div className="bg-indigo-100 text-indigo-700 text-sm font-bold px-3 py-1 rounded-full">
-                {university.rank}
               </div>
 
               {/* University name */}
