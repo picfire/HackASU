@@ -11,20 +11,18 @@ export default function Navbar() {
   if (!isLoaded) return null;
 
   return (
-    <div className="navbar bg-transparent px-4 py-2 flex justify-between items-center">
-      {/* Left side: logo + links */}
+    <div className="navbar px-4 py-2 flex justify-between items-center" style={{ background: 'radial-gradient(circle, #b778e0 50%, #9454BF 75%, #9454BF 100%)' }}>
+      {/* Left side: links */}
       <div className="flex items-center gap-4">
-        <Image src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
-
         <button
-          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
           onClick={() => router.push("/")}
         >
           Home
         </button>
 
         <button
-          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
           onClick={() => router.push("/about")}
         >
           About
@@ -32,7 +30,7 @@ export default function Navbar() {
 
         {isSignedIn && (
           <button
-            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500"
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
             onClick={() => router.push("/country-selection")}
           >
             Get Started
@@ -40,11 +38,16 @@ export default function Navbar() {
         )}
       </div>
 
+      {/* Middle: logo with half circle background */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center" style={{ width: '100px', height: '50px', backgroundColor: 'white', borderRadius: '50px 50px 0 0', overflow: 'hidden' }}>
+        <Image src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
+      </div>
+
       {/* Right side: sign out */}
       <div>
         {isSignedIn && (
           <SignOutButton>
-            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500">
+            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white">
               Sign Out
             </button>
           </SignOutButton>
