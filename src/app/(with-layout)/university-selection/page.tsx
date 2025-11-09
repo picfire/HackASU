@@ -489,44 +489,14 @@ const universitiesByCountry: {
       logo: "/universities/groningen.png",
     },
   ],
-  // Default for other countries
+  // Default for other countries - no logos needed
   Other: [
-    {
-      name: "Top University 1",
-      rank: "#1",
-      city: "Capital City",
-      logo: "/universities/default.png",
-    },
-    {
-      name: "Top University 2",
-      rank: "#2",
-      city: "Major City",
-      logo: "/universities/default.png",
-    },
-    {
-      name: "Top University 3",
-      rank: "#3",
-      city: "University Town",
-      logo: "/universities/default.png",
-    },
-    {
-      name: "Top University 4",
-      rank: "#4",
-      city: "Coastal City",
-      logo: "/universities/default.png",
-    },
-    {
-      name: "Top University 5",
-      rank: "#5",
-      city: "Business Hub",
-      logo: "/universities/default.png",
-    },
-    {
-      name: "Top University 6",
-      rank: "#6",
-      city: "Historic City",
-      logo: "/universities/default.png",
-    },
+    { name: "Top University 1", rank: "#1", city: "Capital City", logo: "" },
+    { name: "Top University 2", rank: "#2", city: "Major City", logo: "" },
+    { name: "Top University 3", rank: "#3", city: "University Town", logo: "" },
+    { name: "Top University 4", rank: "#4", city: "Coastal City", logo: "" },
+    { name: "Top University 5", rank: "#5", city: "Business Hub", logo: "" },
+    { name: "Top University 6", rank: "#6", city: "Historic City", logo: "" },
   ],
 };
 
@@ -626,15 +596,19 @@ export default function UniversitySelection() {
                 </div>
               )}
 
-              {/* University Logo */}
-              <div className="w-20 h-20 relative mb-4">
-                <Image
-                  src={university.logo}
-                  alt={`${university.name} logo`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              {/* University Logo or Emoji */}
+              {university.logo ? (
+                <div className="w-20 h-20 relative mb-4">
+                  <Image
+                    src={university.logo}
+                    alt={`${university.name} logo`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="text-7xl mb-4">🎓</div>
+              )}
 
               {/* University name */}
               <h3 className="text-lg font-bold text-gray-900 text-center">
