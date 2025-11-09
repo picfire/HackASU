@@ -133,11 +133,6 @@ export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
       <div className="flex flex-col items-center gap-8 py-12">
         {lessons.map((lesson, index) => (
           <div key={lesson.id} className="relative flex flex-col items-center">
-            {/* Connecting Line */}
-            {index < lessons.length - 1 && (
-              <div className="absolute top-16 w-1 h-20 bg-slate-700"></div>
-            )}
-            
             {/* Lesson Circle */}
             <div className={`lesson-node relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all cursor-pointer
               ${lesson.current 
