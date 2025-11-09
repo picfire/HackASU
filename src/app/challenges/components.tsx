@@ -155,8 +155,7 @@ export function LessonTimeline({ lessons }: { lessons: LessonNode[] }) {
         ))}
       </div>
 
-      {/* Bottom Text */}
-      <div className="text-center mt-12">
+      <div className="text-center mt-12"> {/* this the bottom text */}
         <p className="text-gray-400 text-lg">Talk about your hometown</p>
         <button className="mt-6 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-semibold">
           JUMP HERE?

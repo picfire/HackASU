@@ -22,8 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className="antialiased text-black">
-          <Navbar />
+        <body className="antialiased text-black" suppressHydrationWarning>
           <main>{children}</main>
         </body>
       </html>
