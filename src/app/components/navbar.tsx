@@ -15,14 +15,14 @@ export default function Navbar() {
       {/* Left side: links */}
       <div className="flex items-center gap-4">
         <button
-          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-white hover:border-opacity-75 transition-all duration-500 text-white"
           onClick={() => router.push("/")}
         >
           Home
         </button>
 
         <button
-          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
+          className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-white hover:border-opacity-75 transition-all duration-500 text-white"
           onClick={() => router.push("/about")}
         >
           About
@@ -30,7 +30,7 @@ export default function Navbar() {
 
         {isSignedIn && (
           <button
-            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-white hover:border-opacity-75 transition-all duration-500 text-white"
             onClick={() => router.push("/country-selection")}
           >
             Get Started
@@ -39,7 +39,7 @@ export default function Navbar() {
 
         {isSignedIn && (
           <button
-            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white"
+            className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-white hover:border-opacity-75 transition-all duration-500 text-white"
             onClick={() => router.push("/challenges")}
           >
             Challenges
@@ -56,7 +56,7 @@ export default function Navbar() {
       <div>
         {isSignedIn && (
           <SignOutButton>
-            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-black transition-all duration-500 text-white">
+            <button className="px-4 py-2 text-lg font-semibold rounded-lg border-2 border-transparent hover:border-white hover:border-opacity-75 transition-all duration-500 text-white">
               Sign Out
             </button>
           </SignOutButton>

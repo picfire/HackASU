@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import AnimatedContent from "@/app/components/animatedcontent";
 
 // University data by country with logo paths
 const universitiesByCountry: {
@@ -549,98 +550,111 @@ export default function UniversitySelection() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white from-0% via-purple-50 via-50% to-purple-100 to-100% p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Select Your University in {selectedCountry} 🎓
-          </h1>
-          <p className="text-xl text-gray-700">
-            Choose from top-ranked universities
-          </p>
-        </div>
+      <AnimatedContent
+        distance={50}
+        direction="vertical"
+        reverse={false}
+        duration={1.6}
+        ease="power3.out"
+        initialOpacity={0}
+        animateOpacity
+        scale={1}
+        threshold={0.3}
+        delay={0.2}
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Select Your University in {selectedCountry} 🎓
+            </h1>
+            <p className="text-xl text-gray-700">
+              Choose from top-ranked universities
+            </p>
+          </div>
 
-        {/* University Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-          {universities.map((university) => (
+          {/* University Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            {universities.map((university) => (
+              <button
+                key={university.name}
+                onClick={() => handleUniversitySelect(university.name)}
+                className={`
+                  relative p-6 rounded-2xl border-2 transition-all duration-300
+                  flex flex-col items-center gap-3
+                  hover:scale-105 hover:shadow-xl
+                  ${
+                    selectedUniversity === university.name
+                      ? "border-purple-500 bg-purple-50 shadow-xl scale-105"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  }
+                `}
+              >
+                {/* Selection checkmark */}
+                {selectedUniversity === university.name && (
+                  <div className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                )}
+
+                {/* University Logo or Emoji */}
+                {university.logo ? (
+                  <div className="w-20 h-20 relative mb-4">
+                    <Image
+                      src={university.logo}
+                      alt={`${university.name} logo`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-7xl mb-4">🎓</div>
+                )}
+
+                {/* University name */}
+                <h3 className="text-lg font-bold text-gray-900 text-center">
+                  {university.name}
+                </h3>
+
+                {/* Location */}
+                <p className="text-sm text-gray-600 flex items-center gap-1">
+                  <span>📍</span>
+                  {university.city}
+                </p>
+              </button>
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <button
-              key={university.name}
-              onClick={() => handleUniversitySelect(university.name)}
+              onClick={handleContinue}
+              disabled={!selectedUniversity}
               className={`
-                relative p-6 rounded-2xl border-2 transition-all duration-300
-                flex flex-col items-center gap-3
-                hover:scale-105 hover:shadow-xl
+                w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
+                transition-all duration-300
                 ${
-                  selectedUniversity === university.name
-                    ? "border-purple-500 bg-purple-50 shadow-xl scale-105"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                  selectedUniversity
+                    ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
+                    : "bg-gray-300 cursor-not-allowed"
                 }
               `}
             >
-              {/* Selection checkmark */}
-              {selectedUniversity === university.name && (
-                <div className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-5 h-5 text-white"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-              )}
-
-              {/* University Logo or Emoji */}
-              {university.logo ? (
-                <div className="w-20 h-20 relative mb-4">
-                  <Image
-                    src={university.logo}
-                    alt={`${university.name} logo`}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ) : (
-                <div className="text-7xl mb-4">🎓</div>
-              )}
-
-              {/* University name */}
-              <h3 className="text-lg font-bold text-gray-900 text-center">
-                {university.name}
-              </h3>
-
-              {/* Location */}
-              <p className="text-sm text-gray-600 flex items-center gap-1">
-                <span>📍</span>
-                {university.city}
-              </p>
+              Continue to Challenges
             </button>
-          ))}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-          <button
-            onClick={handleContinue}
-            disabled={!selectedUniversity}
-            className={`
-              w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
-              transition-all duration-300
-              ${
-                selectedUniversity
-                  ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
-                  : "bg-gray-300 cursor-not-allowed"
-              }
-            `}
-          >
-            Continue to Challenges
-          </button>
-        </div>
-      </div>
+          </div>
+        </div>  
+      </AnimatedContent>
     </div>
   );
 }

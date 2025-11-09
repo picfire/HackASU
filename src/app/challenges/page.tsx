@@ -6,6 +6,7 @@ import { StatsBar, LeagueCard, DailyQuests, LessonTimeline } from './components'
 import { Survey } from './components/survey';
 import { QuestionDisplay } from './components/question';
 import { AllQuestionsLoader } from './components/allQuestionsLoader';
+import AnimatedContent from '../components/animatedcontent';
 
 interface UserContext {
   destination: string;
@@ -196,24 +197,50 @@ export default function Challenges() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
         {/* Main Timeline Area */}
-        <div className="lg:col-span-2">
-          <LessonTimeline lessons={lessons} onCompleteLesson={completeLesson} />
-        </div>
+        {/* <AnimatedContent
+          distance={150}
+          direction="horizontal"
+          reverse={true}
+          duration={1.6}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          scale={1}
+          threshold={0.3}
+          delay={0.2}
+        >   */}
+          <div className="lg:col-span-2">
+            <LessonTimeline lessons={lessons} onCompleteLesson={completeLesson} />
+          </div>
+        {/* </AnimatedContent> */}
 
         {/* Right Sidebar */}
-        <div className="space-y-6">
-          <StatsBar />
-          <LeagueCard />
-          <DailyQuests />
-          
-          {/* Debug Reset Button */}
-          <button
-            onClick={resetProgress}
-            className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition"
-          >
-            Reset Progress (Debug)
-          </button>
-        </div>
+        <AnimatedContent
+          distance={100}
+          direction="horizontal"
+          reverse={true}
+          duration={1.0}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          scale={1}
+          threshold={0.3}
+          delay={0.2}
+        >  
+          <div className="space-y-6">
+            <StatsBar />
+            <LeagueCard />
+            <DailyQuests />
+            
+            {/* Debug Reset Button */}
+            <button
+              onClick={resetProgress}
+              className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition"
+            >
+              Reset Progress (Debug)
+            </button>
+          </div>
+        </AnimatedContent>
       </div>
     </div>
   );

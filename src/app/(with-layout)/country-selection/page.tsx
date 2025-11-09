@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import AnimatedContent from "@/app/components/animatedcontent";
 
 // Country data with flag emojis
 const countries = [
@@ -44,84 +45,97 @@ export default function CountrySelection() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white from-0% via-purple-50 via-50% to-purple-100 to-100% p-11">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome {user?.firstName}!
-          </h1>
-          <p className="text-xl text-gray-700">
-            Select the country you want to study/work in:
-          </p>
-        </div>
+      <AnimatedContent
+        distance={50}
+        direction="vertical"
+        reverse={false}
+        duration={1.6}
+        ease="power3.out"
+        initialOpacity={0}
+        animateOpacity
+        scale={1}
+        threshold={0.3}
+        delay={0.2}
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Welcome {user?.firstName}!
+            </h1>
+            <p className="text-xl text-gray-700">
+              Select the country you want to study/work in:
+            </p>
+          </div>
 
-        {/* Country Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-          {countries.map((country) => (
+          {/* Country Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            {countries.map((country) => (
+              <button
+                key={country.name}
+                onClick={() => handleCountrySelect(country.name)}
+                className={`
+                  relative p-6 rounded-2xl border-2 transition-all duration-200
+                  flex flex-col items-center justify-center gap-3
+                  hover:scale-105 hover:shadow-xl
+                  ${
+                    selectedCountry === country.name
+                      ? "border-purple-500 bg-purple-50 shadow-lg scale-105"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  }
+                `}
+              >
+                {/* Selection checkmark */}
+                {selectedCountry === country.name && (
+                  <div className="absolute top-3 right-3 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                )}
+
+                {/* Flag */}
+                <div className="text-6xl mb-2">{country.flag}</div>
+
+                {/* Country name */}
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {country.name}
+                </h3>
+
+                {/* Info */}
+                <p className="text-sm text-gray-600">{country.info}</p>
+              </button>
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <button
-              key={country.name}
-              onClick={() => handleCountrySelect(country.name)}
+              onClick={handleContinue}
+              disabled={!selectedCountry}
               className={`
-                relative p-6 rounded-2xl border-2 transition-all duration-200
-                flex flex-col items-center justify-center gap-3
-                hover:scale-105 hover:shadow-xl
+                w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
+                transition-all duration-200
                 ${
-                  selectedCountry === country.name
-                    ? "border-purple-500 bg-purple-50 shadow-lg scale-105"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                  selectedCountry
+                    ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
+                    : "bg-gray-300 cursor-not-allowed"
                 }
               `}
             >
-              {/* Selection checkmark */}
-              {selectedCountry === country.name && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-white"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-              )}
-
-              {/* Flag */}
-              <div className="text-6xl mb-2">{country.flag}</div>
-
-              {/* Country name */}
-              <h3 className="text-xl font-semibold text-gray-900">
-                {country.name}
-              </h3>
-
-              {/* Info */}
-              <p className="text-sm text-gray-600">{country.info}</p>
+              Continue
             </button>
-          ))}
+          </div>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-          <button
-            onClick={handleContinue}
-            disabled={!selectedCountry}
-            className={`
-              w-full py-4 px-6 rounded-xl font-semibold text-white text-lg
-              transition-all duration-200
-              ${
-                selectedCountry
-                  ? "bg-purple-500 hover:bg-purple-600 cursor-pointer shadow-lg hover:shadow-xl"
-                  : "bg-gray-300 cursor-not-allowed"
-              }
-            `}
-          >
-            Continue
-          </button>
-        </div>
-      </div>
+      </AnimatedContent>
     </div>
   );
 }
