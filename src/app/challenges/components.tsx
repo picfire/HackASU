@@ -2,16 +2,10 @@
 import './page.css';
 import { useEffect, useRef } from 'react';
 import buttonSvg from './assets/button.svg';
+import starSvg from './assets/Star.svg';
+import keySvg from './assets/Key.svg';
 
-export function Header() {
-  return (
-    <header className="tab-header">
-      <div className="flex items-center justify-center pl-6">
-        <img src="/Impulsa.svg" alt="Impulsa Logo" width={80} height={80} />
-      </div>
-    </header>
-  );
-}
+
 
 export function StatsBar() {
   const stats = [
@@ -135,8 +129,12 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
                     : ''
                 }`}
               />
-              <div className="absolute inset-0 flex items-center justify-center text-3xl bottom-2">
-                {lesson.icon}
+              <div className="absolute inset-0 flex items-center justify-center bottom-2">
+                <img 
+                  src={lesson.icon === 'key' ? keySvg.src : starSvg.src}
+                  alt={lesson.icon}
+                  className="w-12 h-12 object-contain"
+                />
               </div>
               {lesson.current && (
                 <div className="absolute -top-3 -right-3 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold animate-pulse">
