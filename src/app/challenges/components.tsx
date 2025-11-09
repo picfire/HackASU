@@ -196,11 +196,6 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
                   className="w-12 h-12 object-contain"
                 />
               </div>
-              {lesson.current && (
-                <div className="absolute -top-3 -right-3 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold animate-pulse">
-                  ⚡
-                </div>
-              )}
             </button>
             
             {/* Label */}
