@@ -63,8 +63,12 @@ export default function Challenges() {
     if (savedCachedQuestionsBySection) {
       setCachedQuestionsBySection(JSON.parse(savedCachedQuestionsBySection));
     }
-    if (savedStage) {
+    // Only restore stage if it's not questions - always start at dashboard
+    if (savedStage && savedStage !== 'questions' && savedStage !== 'loading') {
       setStage(savedStage as 'survey' | 'loading' | 'questions' | 'dashboard');
+    } else if (savedStage && (savedStage === 'questions' || savedStage === 'loading')) {
+      // If they were in questions/loading, go back to dashboard
+      setStage('dashboard');
     }
     if (savedLesson) {
       setCurrentLesson(parseInt(savedLesson));
@@ -79,10 +83,13 @@ export default function Challenges() {
     setIsHydrated(true);
   }, []);
 
-  // Update cached questions when section changes
+  // Update cached questions when section changes (but DON'T change stage)
   useEffect(() => {
     if (cachedQuestionsBySection[currentSection]) {
       setCachedQuestions(cachedQuestionsBySection[currentSection]);
+    } else {
+      // Clear questions if switching to a section with no cache
+      setCachedQuestions([]);
     }
   }, [currentSection, cachedQuestionsBySection]);
 
@@ -159,31 +166,12 @@ export default function Challenges() {
     setCurrentLesson(id);
     localStorage.setItem('currentLesson', id.toString());
     
-    // Check if we have cached questions for this section
-    const questionsForSection = cachedQuestionsBySection[currentSection];
-    
-    // Go to questions stage to display the questions
-    if (questionsForSection && questionsForSection.length > 0) {
-      console.log('Setting stage to questions with', questionsForSection.length, 'cached questions for section:', currentSection);
-      setCachedQuestions(questionsForSection);
-      setStage('questions');
-      localStorage.setItem('challengeStage', 'questions');
-    } else {
-      console.log('No cached questions for section:', currentSection, '- reloading...');
-      setStage('loading');
-      localStorage.setItem('challengeStage', 'loading');
-    }
+    // Always show loading state when clicking a circle
+    setStage('loading');
+    localStorage.setItem('challengeStage', 'loading');
   };
 
-  const handleSectionNeedsReload = () => {
-    // When switching sections, if there are no cached questions for the new section,
-    // trigger a reload
-    if (!cachedQuestionsBySection[currentSection]) {
-      console.log('Section has no cached questions, triggering reload...');
-      setStage('loading');
-      localStorage.setItem('challengeStage', 'loading');
-    }
-  };
+
 
   const handleQuitChallenge = () => {
     setStage('dashboard');
@@ -264,7 +252,6 @@ export default function Challenges() {
             <SectionsDock 
               currentSection={currentSection} 
               onSectionChange={setCurrentSection}
-              onNeedsReload={handleSectionNeedsReload}
             />
           </div>
         </AnimatedContent>

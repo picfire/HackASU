@@ -28,6 +28,22 @@ export function AllQuestionsLoader({ userContext, currentSection, onComplete }: 
         setLoading(true);
         setError(null);
 
+        // Check if we already have cached questions for this section
+        const cachedQuestionsBySection = localStorage.getItem('cachedQuestionsBySection');
+        if (cachedQuestionsBySection) {
+          const cache = JSON.parse(cachedQuestionsBySection);
+          if (cache[currentSection] && Array.isArray(cache[currentSection]) && cache[currentSection].length === 12) {
+            console.log('Using cached questions for section:', currentSection);
+            // Add a small delay so user sees the loading screen briefly
+            setTimeout(() => {
+              onComplete(cache[currentSection]);
+            }, 800);
+            return;
+          }
+        }
+
+        console.log('No cached questions, fetching from API for section:', currentSection);
+
         const response = await fetch('/api/generateAllQuestions', {
           method: 'POST',
           headers: {
@@ -61,7 +77,7 @@ export function AllQuestionsLoader({ userContext, currentSection, onComplete }: 
     };
 
     loadAllQuestions();
-  }, [userContext, onComplete]);
+  }, [userContext, currentSection, onComplete]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-300 to-purple-500">

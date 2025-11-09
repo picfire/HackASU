@@ -19,16 +19,9 @@ const sections: Section[] = [
 interface SectionsDockProps {
   currentSection: string;
   onSectionChange: (sectionId: string) => void;
-  onNeedsReload?: () => void;
 }
 
-export function SectionsDock({ currentSection, onSectionChange, onNeedsReload }: SectionsDockProps) {
-  const handleSectionClick = (sectionId: string) => {
-    onSectionChange(sectionId);
-    if (onNeedsReload) {
-      onNeedsReload();
-    }
-  };
+export function SectionsDock({ currentSection, onSectionChange }: SectionsDockProps) {
   return (
     <div className="flex flex-col gap-4">
       <SpotlightCard
@@ -42,7 +35,7 @@ export function SectionsDock({ currentSection, onSectionChange, onNeedsReload }:
       </SpotlightCard>
       
       {sections.map((section) => (
-        <div key={section.id} onClick={() => handleSectionClick(section.id)}>
+        <div key={section.id} onClick={() => onSectionChange(section.id)}>
           <SpotlightCard
             className={`cursor-pointer transition-all duration-300 border-0 ${
               currentSection === section.id
