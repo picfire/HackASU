@@ -542,9 +542,7 @@ export default function UniversitySelection() {
     if (!selectedUniversity) return;
 
     localStorage.setItem("selectedUniversity", selectedUniversity);
-    // TODO: Navigate to main dashboard/app
-    alert(`Great choice! Welcome to ${selectedUniversity}! 🎓`);
-    // router.push("/dashboard");
+    router.push("/challenges");
   };
 
   if (!selectedCountry) return null;
