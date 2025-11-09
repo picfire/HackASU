@@ -7,6 +7,7 @@ import { Survey } from './components/survey';
 import { QuestionDisplay } from './components/question';
 import { AllQuestionsLoader } from './components/allQuestionsLoader';
 import AnimatedContent from '../components/animatedcontent';
+import { SectionsDock, sectionLessons } from './components/sections-dock';
 
 interface UserContext {
   destination: string;
@@ -26,6 +27,7 @@ export default function Challenges() {
   const [currentLesson, setCurrentLesson] = useState(1);
   const [cachedQuestions, setCachedQuestions] = useState<QuestionData[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [currentSection, setCurrentSection] = useState<string>('culture');
 
   const initialLessons = [
     { id: 1, type: 'start', completed: false, current: true, icon: 'key' },
@@ -195,7 +197,15 @@ export default function Challenges() {
   return (
     <div className="background-challenges">
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[280px_1fr_400px] gap-6 p-6">
+        {/* Left Sidebar - Sections Dock */}
+        <div className="hidden lg:block">
+          <SectionsDock 
+            currentSection={currentSection} 
+            onSectionChange={setCurrentSection}
+          />
+        </div>
+
         {/* Main Timeline Area */}
         {/* <AnimatedContent
           distance={150}
@@ -209,8 +219,8 @@ export default function Challenges() {
           threshold={0.3}
           delay={0.2}
         >   */}
-          <div className="lg:col-span-2">
-            <LessonTimeline lessons={lessons} onCompleteLesson={completeLesson} />
+          <div>
+            <LessonTimeline lessons={sectionLessons[currentSection as keyof typeof sectionLessons]} onCompleteLesson={completeLesson} />
           </div>
         {/* </AnimatedContent> */}
 

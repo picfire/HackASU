@@ -155,7 +155,7 @@ interface LessonNode {
 
 export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonNode[], onCompleteLesson?: (id: number) => void }) {
   return (
-    <div className="relative">
+    <div className="relative flex flex-col items-center">
       <div className="flex flex-col items-center gap-1 py-5">
         {lessons.map((lesson, index) => {
           const currentLesson = lessons.find(l => l.current);
@@ -224,11 +224,15 @@ export function LessonTimeline({ lessons, onCompleteLesson }: { lessons: LessonN
         })}
       </div>
 
-      <div className="text-center mt-12"> {/* this the bottom text */}
-        <p className="text-gray-400 text-lg">Talk about your hometown</p>
-        <button className="mt-6 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-semibold">
-          JUMP HERE?
-        </button>
+      <div className="mt-12">
+        <SpotlightCard
+          className="bg-gradient-to-br from-[#613873] to-[#4a2c5a] border-0"
+          spotlightColor="rgba(255, 255, 255, 0.5)"
+        >
+          <button className="bg-transparent hover:bg-white/10 text-white px-6 py-3 rounded-lg font-semibold transition">
+            JUMP HERE?
+          </button>
+        </SpotlightCard>
       </div>
     </div>
   );
