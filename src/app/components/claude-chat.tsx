@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -42,31 +43,32 @@ export default function ClaudeChat() {
       const selectedUniversity =
         localStorage.getItem("selectedUniversity") || "";
 
-      const systemContext = selectedCountry
-        ? `The user is planning to study at ${selectedUniversity} in ${selectedCountry}. Help them with culture shock, social customs, and adjustment tips specific to this context.`
-        : "Help the user with general culture shock questions and international student concerns.";
-
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      // Call your backend API route instead of Anthropic directly
+      const response = await fetch("/api/chatbot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          messages: [
-            {
-              role: "user",
-              content: `${systemContext}\n\nUser question: ${input}`,
-            },
-          ],
+          messages: [...messages, userMessage],
+          selectedCountry,
+          selectedUniversity,
         }),
       });
 
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
       const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       const assistantMessage: Message = {
         role: "assistant",
-        content: data.content[0].text,
+        content: data.response,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -168,9 +170,26 @@ export default function ClaudeChat() {
                       : "bg-white text-gray-800 border-2 border-gray-200"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">
-                    {message.content}
-                  </p>
+                  {message.role === "assistant" ? (
+                    <div className="text-sm prose prose-sm max-w-none prose-headings:text-purple-600 prose-headings:font-bold prose-ul:list-disc prose-ul:ml-4 prose-strong:text-gray-900">
+                      <ReactMarkdown
+                        components={{
+                          h1: ({ node, ...props }) => <h1 className="text-lg font-bold mb-2" {...props} />,
+                          h2: ({ node, ...props }) => <h2 className="text-base font-bold mb-2 mt-3" {...props} />,
+                          ul: ({ node, ...props }) => <ul className="list-disc ml-4 space-y-1" {...props} />,
+                          li: ({ node, ...props }) => <li className="text-sm" {...props} />,
+                          strong: ({ node, ...props }) => <strong className="font-semibold" {...props} />,
+                          p: ({ node, ...props }) => <p className="mb-2" {...props} />,
+                        }}
+                      >
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">
+                      {message.content}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
@@ -197,7 +216,7 @@ export default function ClaudeChat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask about culture, customs, tips..."
-                className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                className="flex-1 px-4 py-2 text-gray-800 placeholder-gray-500 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none bg-white"
                 disabled={isLoading}
               />
               <button
